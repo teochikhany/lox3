@@ -15,20 +15,9 @@
 #include "Chunk.h"
 #include "Debug.h"
 #include "VM.h"
+#include "Compiler.h"
 
-class compiler : public loxBaseListener
-{
-    void enterPrimary(loxParser::PrimaryContext* ctx) override
-    {
-        printf("hyy ");
-        //auto num = ctx->NUMBER();
-        //auto num2 = ctx->STRING();
 
-        std::cout << ctx->getText();
-
-        
-    }
-};
 
 
 int main(int argc, const char* argv[]) {
@@ -43,13 +32,16 @@ int main(int argc, const char* argv[]) {
 
     // Create a token stream from the lexer
     antlr4::CommonTokenStream tokens(&lexer);
+    // tokens.fill();
 
     // Create a parser from the token stream
     loxParser parser(&tokens);
 
     tree::ParseTree* tree = parser.program();
 
-    tree::ParseTreeWalker::DEFAULT.walk(new compiler(), tree);
+    Chunk* chunk = new Chunk();
+
+    tree::ParseTreeWalker::DEFAULT.walk(new Compiler(chunk), tree);
 
     return 0;
 }

@@ -74,9 +74,6 @@ public:
   virtual void enterTerm(loxParser::TermContext *ctx) = 0;
   virtual void exitTerm(loxParser::TermContext *ctx) = 0;
 
-  virtual void enterFactor(loxParser::FactorContext *ctx) = 0;
-  virtual void exitFactor(loxParser::FactorContext *ctx) = 0;
-
   virtual void enterUnary(loxParser::UnaryContext *ctx) = 0;
   virtual void exitUnary(loxParser::UnaryContext *ctx) = 0;
 

@@ -32,6 +32,6 @@ public:
 	int addConstant(Value value);					// add a element to the end of the vector "constants"
 	Value getConst(int offset);						// get the element at index "offset" of vector "constants"
 
-	int getLine(int offset);
+	int getLine(int offset);	// bug lama ma ektob return, beta3mol runtime error, vector out of bound
 };
 

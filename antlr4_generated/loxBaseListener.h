@@ -76,16 +76,13 @@ public:
   virtual void enterTerm(loxParser::TermContext * /*ctx*/) override { }
   virtual void exitTerm(loxParser::TermContext * /*ctx*/) override { }
 
-  virtual void enterFactor(loxParser::FactorContext * /*ctx*/) override { }
-  virtual void exitFactor(loxParser::FactorContext * /*ctx*/) override { }
-
   virtual void enterUnary(loxParser::UnaryContext * /*ctx*/) override { }
   virtual void exitUnary(loxParser::UnaryContext * /*ctx*/) override { }
 
   virtual void enterCall(loxParser::CallContext * /*ctx*/) override { }
   virtual void exitCall(loxParser::CallContext * /*ctx*/) override { }
 
-  virtual void enterPrimary(loxParser::PrimaryContext * ctx) override { }
+  virtual void enterPrimary(loxParser::PrimaryContext * /*ctx*/) override { }
   virtual void exitPrimary(loxParser::PrimaryContext * /*ctx*/) override { }
 
   virtual void enterFunction(loxParser::FunctionContext * /*ctx*/) override { }

@@ -27,8 +27,8 @@ public:
     RuleIfStmt = 8, RulePrintStmt = 9, RuleReturnStmt = 10, RuleWhileStmt = 11, 
     RuleBlock = 12, RuleExpression = 13, RuleAssignment = 14, RuleLogic_or = 15, 
     RuleLogic_and = 16, RuleEquality = 17, RuleComparison = 18, RuleTerm = 19, 
-    RuleFactor = 20, RuleUnary = 21, RuleCall = 22, RulePrimary = 23, RuleFunction = 24, 
-    RuleParameters = 25, RuleArguments = 26
+    RuleUnary = 20, RuleCall = 21, RulePrimary = 22, RuleFunction = 23, 
+    RuleParameters = 24, RuleArguments = 25
   };
 
   explicit loxParser(antlr4::TokenStream *input);
@@ -61,7 +61,6 @@ public:
   class EqualityContext;
   class ComparisonContext;
   class TermContext;
-  class FactorContext;
   class UnaryContext;
   class CallContext;
   class PrimaryContext;
@@ -350,8 +349,9 @@ public:
   public:
     TermContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
-    std::vector<FactorContext *> factor();
-    FactorContext* factor(size_t i);
+    UnaryContext *unary();
+    std::vector<TermContext *> term();
+    TermContext* term(size_t i);
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
@@ -359,21 +359,7 @@ public:
   };
 
   TermContext* term();
-
-  class  FactorContext : public antlr4::ParserRuleContext {
-  public:
-    FactorContext(antlr4::ParserRuleContext *parent, size_t invokingState);
-    virtual size_t getRuleIndex() const override;
-    std::vector<UnaryContext *> unary();
-    UnaryContext* unary(size_t i);
-
-    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
-    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
-   
-  };
-
-  FactorContext* factor();
-
+  TermContext* term(int precedence);
   class  UnaryContext : public antlr4::ParserRuleContext {
   public:
     UnaryContext(antlr4::ParserRuleContext *parent, size_t invokingState);
@@ -464,6 +450,9 @@ public:
 
   ArgumentsContext* arguments();
 
+
+  virtual bool sempred(antlr4::RuleContext *_localctx, size_t ruleIndex, size_t predicateIndex) override;
+  bool termSempred(TermContext *_localctx, size_t predicateIndex);
 
 private:
   static std::vector<antlr4::dfa::DFA> _decisionToDFA;
