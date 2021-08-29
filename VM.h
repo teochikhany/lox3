@@ -22,6 +22,7 @@ private:
 	Value pop();
 	void resetStack();
 	InterpretResult run();
+	Value peek(int distance);
 
 public:
 	VM();

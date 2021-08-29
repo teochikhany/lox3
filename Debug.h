@@ -11,7 +11,7 @@ private:
 
 public:
 	static void disassembleChunk(Chunk* chunk, const char* name);
-	static void PrintStack(std::vector<double> v);
+	static void PrintStack(std::vector<Value> v);
 	static int disassembleInstruction(Chunk* chunk, int offset);
 };
 

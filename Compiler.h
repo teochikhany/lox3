@@ -11,8 +11,8 @@ public:
 	void exitProgram(loxParser::ProgramContext* ctx) override;
 	void exitUnary(loxParser::UnaryContext* ctx) override;
 	void exitTerm(loxParser::TermContext* ctx) override;
-	// void exitFactor(loxParser::FactorContext* ctx) override;
-	// void exitMul_div(loxParser::Mul_divContext* ctx) override;
+	void exitEquality(loxParser::EqualityContext* ctx) override;
+	void exitComparison(loxParser::ComparisonContext* ctx) override;
 
 private:
 	Chunk* chunk;

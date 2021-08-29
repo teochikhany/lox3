@@ -42,9 +42,15 @@ InterpretResult VM::interpret(Chunk* chunk2) {
 InterpretResult VM::run() {
 #define BINARY_OP(op) \
         do { \
-          double b = pop(); \
-          double a = pop(); \
-          push(a op b); \
+          if ( ! peek(0).isNumber() || ! peek(1).isNumber() ) \
+          { \
+              std::cout << "Operand must be a number."; \
+              return InterpretResult::INTERPRET_RUNTIME_ERROR; \
+          } \
+            \
+          double b = pop().getDouble(); \
+          double a = pop().getDouble(); \
+          push( Value(a op b) ); \
         } while (false)
 
     std::cout << std::endl << std::endl;
@@ -57,21 +63,58 @@ InterpretResult VM::run() {
         uint8_t instruction;
 
         switch (instruction = *ip++) {
-        case OP_CONSTANT: {
+        case OP_CONSTANT: 
+        {
             Value constant = chunk->getConst(*ip++);
             push(constant);
             break;
         }
+
+        case OP_NIL:        push(Value()); break;
+        case OP_TRUE:       push(Value(true)); break;
+        case OP_FALSE:      push(Value(false));break;
+
+        case OP_NOT:
+        {
+            if (!peek(0).isBool())
+            {
+                std::cout << "Operand must be a boolean.";
+                return InterpretResult::INTERPRET_RUNTIME_ERROR;
+            }
+
+            push(Value(!pop().getBool()));
+            break;
+        }
+
+        case OP_EQUAL: 
+        {
+            Value b = pop();
+            Value a = pop();
+            push(Value( a.isEqual(b) ));
+            break;
+        }
+
+        case OP_GREATER:    BINARY_OP(> ); break;
+        case OP_LESS:       BINARY_OP(< ); break;
+        
         case OP_ADD:      BINARY_OP(+); break;
         case OP_SUBTRACT: BINARY_OP(-); break;
         case OP_MULTIPLY: BINARY_OP(*); break;
         case OP_DIVIDE:   BINARY_OP(/ ); break;
-        case OP_NEGATE:   push(-pop()); break;
+        case OP_NEGATE:  
+
+            if (!peek(0).isNumber())
+            {
+                std::cout << "Operand must be a number.";
+                return InterpretResult::INTERPRET_RUNTIME_ERROR;
+            }
+
+            push(Value( -pop().getDouble() )); 
+            break;
+
         case OP_RETURN:
-        {
-            std::cout << " \t\t " << pop() << std::endl;
+            std::cout << " \t\t " << pop().Print() << std::endl;
             return InterpretResult::INTERPRET_OK;
-        }
         }
     }
 
@@ -85,7 +128,7 @@ void VM::push(Value value)
 
 Value VM::pop()
 {
-    double d = stack.back();
+    Value d = stack.back();
     stack.pop_back();
     return d;
 }
@@ -93,4 +136,9 @@ Value VM::pop()
 void VM::resetStack()
 {
     stack.empty();
+}
+
+Value VM::peek(int distance)
+{
+    return stack[stack.size() - 1 - distance];
 }

@@ -4,7 +4,7 @@
 Chunk::Chunk()
 {
 	code = std::vector<uint8_t>();
-	constants = std::vector<double>();
+	constants = std::vector<Value>();
 	lines = std::vector<int>();
 }
 
