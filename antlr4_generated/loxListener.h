@@ -41,6 +41,9 @@ public:
   virtual void enterIfStmt(loxParser::IfStmtContext *ctx) = 0;
   virtual void exitIfStmt(loxParser::IfStmtContext *ctx) = 0;
 
+  virtual void enterElseStmt(loxParser::ElseStmtContext *ctx) = 0;
+  virtual void exitElseStmt(loxParser::ElseStmtContext *ctx) = 0;
+
   virtual void enterPrintStmt(loxParser::PrintStmtContext *ctx) = 0;
   virtual void exitPrintStmt(loxParser::PrintStmtContext *ctx) = 0;
 

@@ -1,9 +1,10 @@
-#include "antlr4_generated/loxBaseListener.h"
-#include "antlr4_generated/loxBaseListener.cpp"
+
 
 #include "Compiler.h"
 #include "Debug.h"
 #include "VM.h"
+#include "main.h"
+
 
 
 void Compiler::enterPrimary(loxParser::PrimaryContext* ctx) // maybe in antlr I should seperate the different Primaries to eliminate this if statement
@@ -126,6 +127,61 @@ void Compiler::exitTerm(loxParser::TermContext* ctx)
             return;
         }
     }
+}
+
+void Compiler::enterIfStmt(loxParser::IfStmtContext* ctx)
+{
+    int line = ctx->getStart()->getLine();
+
+    // walking the if condition
+    auto ifCondition = ctx->expression();
+    Helper::Walk(this, ifCondition);
+
+    // writing the jump with a fake offset
+    chunk->WriteChunk(OP_JUMP_IF_FALSE, line);
+    chunk->WriteChunk(0xff, line);
+
+    int old_size = chunk->getSize() - 1;
+
+    // walking the block inside the if
+    auto ifStatement = ctx->statement();
+    Helper::Walk(this, ifStatement);
+
+    int old_size2 = 0;
+
+    // I only need to add the OP_JUMP if there is a else statement
+    if (ctx->elseStmt())
+    {
+        // to jump over the else block with a fake offset for now
+        chunk->WriteChunk(OP_JUMP, ifStatement->getStop()->getLine());
+        chunk->WriteChunk(0xff, line);
+        old_size2 = chunk->getSize() - 1;
+    }
+
+    // patching the OP_JUMP_IF_FALSE
+    chunk->WriteChunkOffset(chunk->getSize() - old_size, old_size);
+
+    if (ctx->elseStmt())
+    {
+        // walking the block inside the else
+        auto elseStatement = ctx->elseStmt()->statement();
+        Helper::Walk(this, elseStatement);
+        // patch the OP_JUMP
+        chunk->WriteChunkOffset(chunk->getSize() - old_size2, old_size2);
+    }
+
+    // this removes all the children because we already parsed them and if we leave them it will cause them to be evaluated twice.
+    while (ctx->children.size() > 0)
+    {
+        ctx->removeLastChild();
+    }
+
+    //ctx->exitRule(this);
+}
+
+void Compiler::enterExpression(loxParser::ExpressionContext* ctx)
+{
+
 }
 
 

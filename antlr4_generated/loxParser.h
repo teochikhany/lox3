@@ -24,11 +24,11 @@ public:
   enum {
     RuleProgram = 0, RuleDeclaration = 1, RuleClassDecl = 2, RuleFunDecl = 3, 
     RuleVarDecl = 4, RuleStatement = 5, RuleExprStmt = 6, RuleForStmt = 7, 
-    RuleIfStmt = 8, RulePrintStmt = 9, RuleReturnStmt = 10, RuleWhileStmt = 11, 
-    RuleBlock = 12, RuleExpression = 13, RuleAssignment = 14, RuleLogic_or = 15, 
-    RuleLogic_and = 16, RuleEquality = 17, RuleComparison = 18, RuleTerm = 19, 
-    RuleUnary = 20, RuleCall = 21, RulePrimary = 22, RuleFunction = 23, 
-    RuleParameters = 24, RuleArguments = 25
+    RuleIfStmt = 8, RuleElseStmt = 9, RulePrintStmt = 10, RuleReturnStmt = 11, 
+    RuleWhileStmt = 12, RuleBlock = 13, RuleExpression = 14, RuleAssignment = 15, 
+    RuleLogic_or = 16, RuleLogic_and = 17, RuleEquality = 18, RuleComparison = 19, 
+    RuleTerm = 20, RuleUnary = 21, RuleCall = 22, RulePrimary = 23, RuleFunction = 24, 
+    RuleParameters = 25, RuleArguments = 26
   };
 
   explicit loxParser(antlr4::TokenStream *input);
@@ -50,6 +50,7 @@ public:
   class ExprStmtContext;
   class ForStmtContext;
   class IfStmtContext;
+  class ElseStmtContext;
   class PrintStmtContext;
   class ReturnStmtContext;
   class WhileStmtContext;
@@ -196,8 +197,8 @@ public:
     IfStmtContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     ExpressionContext *expression();
-    std::vector<StatementContext *> statement();
-    StatementContext* statement(size_t i);
+    StatementContext *statement();
+    ElseStmtContext *elseStmt();
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
@@ -205,6 +206,19 @@ public:
   };
 
   IfStmtContext* ifStmt();
+
+  class  ElseStmtContext : public antlr4::ParserRuleContext {
+  public:
+    ElseStmtContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    StatementContext *statement();
+
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+   
+  };
+
+  ElseStmtContext* elseStmt();
 
   class  PrintStmtContext : public antlr4::ParserRuleContext {
   public:

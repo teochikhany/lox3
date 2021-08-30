@@ -1,8 +1,7 @@
 #include "VM.h"
-
-#include "VM.h"
 #include "Debug.h"
-// #include "Compiler.h"
+#include "Compiler.h"
+
 #include <iostream>
 
 VM::VM()
@@ -57,8 +56,15 @@ InterpretResult VM::run() {
 
     for (;;) {
 
+        if ((int)(ip - chunk->getAddCode(0)) >= chunk->getSize())
+        {
+            std::cout << "Out of bound in vm" << std::endl;
+            break;
+        }
+
         Debug::PrintStack(stack);
         Debug::disassembleInstruction(chunk, (int)(ip - chunk->getAddCode(0)));
+
 
         uint8_t instruction;
 
@@ -112,10 +118,24 @@ InterpretResult VM::run() {
             push(Value( -pop().getDouble() )); 
             break;
 
+        case OP_JUMP_IF_FALSE:
+        {
+            uint8_t offset = chunk->getCode((ip - chunk->getAddCode(0)) );
+            ip++;   // to make the vm skip the "jump offset"
+            // bool test = peek(0).getBool();
+            bool test = pop().getBool();
+            if (!test) ip += offset - 1;
+            break;
+        }
+
         case OP_RETURN:
             std::cout << " \t\t " << pop().Print() << std::endl;
             return InterpretResult::INTERPRET_OK;
+
+        default:
+            return InterpretResult::INTERPRET_RUNTIME_ERROR;
         }
+
     }
 
 #undef BINARY_OP

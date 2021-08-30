@@ -14,6 +14,12 @@ void Chunk::WriteChunk(uint8_t byte, int line)
 	lines.push_back(line);
 }
 
+void Chunk::WriteChunkOffset(uint8_t byte, int offset)
+{
+	code[offset] = byte;
+	//lines.push_back(line);
+}
+
 int Chunk::getSize()
 {
 	return code.size();

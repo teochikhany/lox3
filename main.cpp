@@ -12,12 +12,17 @@
 #include "antlr4_generated/loxBaseListener.cpp"
 #include "antlr4_generated/loxParser.cpp"
 
+#include "main.h"
 #include "Chunk.h"
 #include "Debug.h"
 #include "VM.h"
 #include "Compiler.h"
 
 
+void Helper::Walk(antlr4::tree::ParseTreeListener* t, antlr4::tree::ParseTree* t2)
+{
+    tree::ParseTreeWalker::DEFAULT.walk(t, t2);
+}
 
 
 int main(int argc, const char* argv[]) {

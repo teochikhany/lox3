@@ -12,6 +12,13 @@ void Debug::disassembleChunk(Chunk* chunk, const char* name)
 }
 
 int Debug::disassembleInstruction(Chunk* chunk, int offset) {
+
+	//if ( offset >= chunk->getSize())
+	//{
+	//	std::cout << "Out of bound in debug" << std::endl;
+	//	return 0;
+	//}
+
 	printf("%04d ", offset);
 
 	if (offset > 0 && chunk->getLine(offset) == chunk->getLine(offset - 1))
@@ -25,6 +32,10 @@ int Debug::disassembleInstruction(Chunk* chunk, int offset) {
 	{
 	case OP_CONSTANT:
 		return ConstantInstruction("OP_CONSTANT", chunk, offset);
+	case OP_JUMP_IF_FALSE:
+		return doubleInstruction("OP_JUMP_IF_FALSE", chunk, offset);
+	case OP_JUMP:
+		return doubleInstruction("OP_JUMP", chunk, offset);
 	case OP_NIL:
 		return simpleInstruction("OP_NIL", offset);
 	case OP_TRUE:
@@ -64,6 +75,14 @@ int Debug::simpleInstruction(const char* name, int offset)
 	return offset + 1;
 }
 
+int Debug::doubleInstruction(const char* name, Chunk* chunk, int offset)
+{
+	printf("%s\t", name);
+	printf("%d", chunk->getCode(offset + 1));
+	printf("\n");
+	return offset + 2;
+}
+
 int Debug::ConstantInstruction(const char* name, Chunk* chunk, int offset)
 {
 	int constantIndex = chunk->getCode(offset + 1);
@@ -77,6 +96,10 @@ int Debug::ConstantInstruction(const char* name, Chunk* chunk, int offset)
 void Debug::PrintStack(std::vector<Value> d)
 {
 	printf("          ");
+
+	if (d.size() == 0)
+		printf("[]");
+
 	for (Value v : d) {
 		printf("[ ");
 		std::cout << v.Print();		

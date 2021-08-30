@@ -43,6 +43,9 @@ public:
   virtual void enterIfStmt(loxParser::IfStmtContext * /*ctx*/) override { }
   virtual void exitIfStmt(loxParser::IfStmtContext * /*ctx*/) override { }
 
+  virtual void enterElseStmt(loxParser::ElseStmtContext * /*ctx*/) override { }
+  virtual void exitElseStmt(loxParser::ElseStmtContext * /*ctx*/) override { }
+
   virtual void enterPrintStmt(loxParser::PrintStmtContext * /*ctx*/) override { }
   virtual void exitPrintStmt(loxParser::PrintStmtContext * /*ctx*/) override { }
 

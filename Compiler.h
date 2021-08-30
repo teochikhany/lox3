@@ -1,4 +1,6 @@
 #include "Chunk.h"
+#include "antlr4_generated/loxBaseListener.h"
+#include "antlr4_generated/loxBaseListener.cpp"
 
 #pragma once
 
@@ -13,6 +15,9 @@ public:
 	void exitTerm(loxParser::TermContext* ctx) override;
 	void exitEquality(loxParser::EqualityContext* ctx) override;
 	void exitComparison(loxParser::ComparisonContext* ctx) override;
+
+	void enterIfStmt(loxParser::IfStmtContext* ctx) override;
+	void enterExpression(loxParser::ExpressionContext* ctx) override;
 
 private:
 	Chunk* chunk;

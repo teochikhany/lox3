@@ -17,6 +17,8 @@ enum OpCode : uint8_t {
 	OP_MULTIPLY,
 	OP_DIVIDE,
 	OP_NOT,
+	OP_JUMP_IF_FALSE,
+	OP_JUMP,
 	OP_RETURN
 };
 
@@ -35,6 +37,7 @@ public:
 	uint8_t getCode(int offset);					// get the element at index "offset" of vector "code"
 	uint8_t* getAddCode(int offset);
 	void WriteChunk(uint8_t byte, int line);		// add a element to the end of the vector "code"
+	void WriteChunkOffset(uint8_t byte, int offset);
 
 	int addConstant(Value value);					// add a element to the end of the vector "constants"
 	Value getConst(int offset);						// get the element at index "offset" of vector "constants"
