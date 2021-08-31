@@ -34,6 +34,8 @@ int Debug::disassembleInstruction(Chunk* chunk, int offset) {
 		return ConstantInstruction("OP_CONSTANT", chunk, offset);
 	case OP_JUMP_IF_FALSE:
 		return doubleInstruction("OP_JUMP_IF_FALSE", chunk, offset);
+	case OP_PRINT:
+		return simpleInstruction("OP_PRINT", offset);
 	case OP_JUMP:
 		return doubleInstruction("OP_JUMP", chunk, offset);
 	case OP_NIL:

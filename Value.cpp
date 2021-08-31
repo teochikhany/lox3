@@ -18,6 +18,12 @@ Value::Value(bool b)
     v.boolean = b;
 }
 
+Value::Value(std::string* str)
+{
+    type = VAL_STR;
+    v.str = str;
+}
+
 Value::Value(Obj* object)
 {
     type = VAL_OBJ;
@@ -40,9 +46,14 @@ bool Value::getBool()
     return v.boolean;
 }
 
-bool Value::getObj()
+Obj* Value::getObj()
 {
     return v.obj;
+}
+
+std::string Value::getString()
+{
+    return *v.str;
 }
 
 bool Value::isBool()
@@ -65,6 +76,11 @@ bool Value::isObj()
     return type == VAL_OBJ;
 }
 
+bool Value::isStr()
+{
+    return type == VAL_STR;
+}
+
 
 std::string Value::Print()      // maybe the return type should be std::ostream and not std::string
 {
@@ -80,6 +96,9 @@ std::string Value::Print()      // maybe the return type should be std::ostream 
         break;
     case VAL_NUMBER:
         result = std::to_string( getDouble() );     // this causes the .000000 to show up
+        break;
+    case VAL_STR:
+        result = getString();
         break;
     default:
         result = "unknown type";
@@ -104,6 +123,8 @@ bool Value::isEqual(Value v2)
         return a == b;
     }
     case VAL_NIL: return false;
+    case VAL_STR: return ! getString().compare(v2.getString());
+
     default: return false;
     }
 }

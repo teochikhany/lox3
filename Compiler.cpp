@@ -1,5 +1,3 @@
-
-
 #include "Compiler.h"
 #include "Debug.h"
 #include "VM.h"
@@ -7,32 +5,40 @@
 
 
 
-void Compiler::enterPrimary(loxParser::PrimaryContext* ctx) // maybe in antlr I should seperate the different Primaries to eliminate this if statement
+void Compiler::enterPrimary(loxParser::PrimaryContext* ctx)
 {
     if (ctx->children.size() == 1)              // if Primary is not a grouping
     {
-        std::string text = ctx->getText();
         int startLine = ctx->getStart()->getLine();
 
-        if (text == "true")
+        switch (ctx->getStart()->getType())
         {
-            chunk->WriteChunk(OP_TRUE, startLine);
-        }
-        else if (text == "false")
+        case 30: chunk->WriteChunk(OP_TRUE, startLine); break;
+        case 31: chunk->WriteChunk(OP_FALSE, startLine); break;
+        case 32: chunk->WriteChunk(OP_NIL, startLine); break;
+        case 36:
         {
-            chunk->WriteChunk(OP_FALSE, startLine);
-        }
-        else if (text == "nil")
-        {
-            chunk->WriteChunk(OP_NIL, startLine);
-        }
-        else
-        {
-            double v = std::stod(text);
+            double v = std::stod(ctx->getText());
 
             uint8_t constant = chunk->addConstant(Value(v));
             chunk->WriteChunk(OP_CONSTANT, startLine);
             chunk->WriteChunk(constant, startLine);
+            break;
+        }
+
+        case 37:
+        {
+            std::string* text = new std::string(ctx->getText()); // create a new string on the heap because otherwise it will get dealocated automatically
+            text->substr(1, text->size() - 2);         // zabeta bel parser
+
+            uint8_t constant = chunk->addConstant(Value(text));
+            chunk->WriteChunk(OP_CONSTANT, startLine);
+            chunk->WriteChunk(constant, startLine);
+            break;
+        }
+
+        default:
+            break;
         }
     }
 }
@@ -178,6 +184,13 @@ void Compiler::enterIfStmt(loxParser::IfStmtContext* ctx)
 
     //ctx->exitRule(this);
 }
+
+
+void Compiler::exitPrintStmt(loxParser::PrintStmtContext* ctx)
+{
+    chunk->WriteChunk(OP_PRINT, ctx->getStart()->getLine());
+}
+
 
 void Compiler::enterExpression(loxParser::ExpressionContext* ctx)
 {

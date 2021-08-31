@@ -76,6 +76,12 @@ InterpretResult VM::run() {
             break;
         }
 
+        case OP_PRINT:
+        {
+            std::cout << pop().Print() << std::endl;
+            break;
+        }
+
         case OP_NIL:        push(Value()); break;
         case OP_TRUE:       push(Value(true)); break;
         case OP_FALSE:      push(Value(false));break;
