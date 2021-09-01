@@ -64,6 +64,10 @@ int Debug::disassembleInstruction(Chunk* chunk, int offset) {
 		return simpleInstruction("OP_GREATER", offset);
 	case OP_LESS:
 		return simpleInstruction("OP_LESS", offset);
+	case OP_DEFINE_GLOBAL:
+		return ConstantInstruction("OP_DEFINE_GLOBAL", chunk, offset);
+	case OP_GET_GLOBAL:
+		return ConstantInstruction("OP_GET_GLOBAL", chunk, offset);
 	default:
 		printf("Unknown opcode %d\n", instruction);
 		return offset + 1;
@@ -108,4 +112,13 @@ void Debug::PrintStack(std::vector<Value> d)
 		printf(" ]");
 	}
 	printf("\n");
+}
+
+void Debug::PrintGlobalTable(std::map<std::string, Value> GlobalTable)
+{
+	std::cout << "\nGlobal table: " << std::endl;
+	for (auto x : GlobalTable)
+	{
+		std::cout << x.first << ": " << x.second.Print() << std::endl;
+	}
 }

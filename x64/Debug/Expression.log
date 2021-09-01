@@ -1,4 +1,4 @@
-﻿  Compiler.cpp
+﻿  VM.cpp
 D:\Documents\Cpp projects\lox3\Expression\include\Exceptions.h(15,25): warning C4251: 'antlr4::RuntimeException::_message': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'antlr4::RuntimeException'
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29910\include\xstring(4648): message : see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
 D:\Documents\Cpp projects\lox3\Expression\include\Exceptions.h(75,25): warning C4251: 'antlr4::IOException::_message': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'antlr4::IOException'
@@ -98,7 +98,7 @@ D:\Documents\Cpp projects\lox3\Expression\include\antlr4-common.h(139): message 
 D:\Documents\Cpp projects\lox3\Expression\include\Parser.h(412,40): warning C4251: 'antlr4::Parser::_errHandler': class 'std::shared_ptr<antlr4::ANTLRErrorStrategy>' needs to have dll-interface to be used by clients of class 'antlr4::Parser'
 D:\Documents\Cpp projects\lox3\Expression\include\antlr4-common.h(139): message : see declaration of 'std::shared_ptr<antlr4::ANTLRErrorStrategy>'
 D:\Documents\Cpp projects\lox3\Expression\include\Parser.h(421,38): warning C4251: 'antlr4::Parser::_precedenceStack': class 'std::vector<int,std::allocator<int>>' needs to have dll-interface to be used by clients of class 'antlr4::Parser'
-D:\Documents\Cpp projects\lox3\Expression\Chunk.h(33): message : see declaration of 'std::vector<int,std::allocator<int>>'
+D:\Documents\Cpp projects\lox3\Expression\Chunk.h(35): message : see declaration of 'std::vector<int,std::allocator<int>>'
 D:\Documents\Cpp projects\lox3\Expression\include\Parser.h(434,59): warning C4251: 'antlr4::Parser::_parseListeners': class 'std::vector<antlr4::tree::ParseTreeListener *,std::allocator<antlr4::tree::ParseTreeListener *>>' needs to have dll-interface to be used by clients of class 'antlr4::Parser'
 D:\Documents\Cpp projects\lox3\Expression\include\Parser.h(128): message : see declaration of 'std::vector<antlr4::tree::ParseTreeListener *,std::allocator<antlr4::tree::ParseTreeListener *>>'
 D:\Documents\Cpp projects\lox3\Expression\include\Parser.h(455,72): warning C4251: 'antlr4::Parser::bypassAltsAtnCache': class 'std::map<std::vector<uint16_t,std::allocator<uint16_t>>,antlr4::atn::ATN,std::less<std::vector<uint16_t,std::allocator<uint16_t>>>,std::allocator<std::pair<const std::vector<uint16_t,std::allocator<uint16_t>>,antlr4::atn::ATN>>>' needs to have dll-interface to be used by clients of class 'antlr4::Parser'
@@ -250,18 +250,10 @@ D:\Documents\Cpp projects\lox3\Expression\include\tree\xpath\XPath.h(75,22): war
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29910\include\xstring(4648): message : see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
 D:\Documents\Cpp projects\lox3\Expression\include\tree\xpath\XPathElement.h(34,26): warning C4251: 'antlr4::tree::xpath::XPathElement::_nodeName': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'antlr4::tree::xpath::XPathElement'
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29910\include\xstring(4648): message : see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
-D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(12,51): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(32,17): warning C4834: discarding return value of function with 'nodiscard' attribute
-D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(48,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(67,46): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(68,54): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(106,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(107,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(121,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(140,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(162,69): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(191,59): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(203,60): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\Documents\Cpp projects\lox3\Expression\VM.cpp(129,49): warning C4244: 'argument': conversion from '__int64' to 'int', possible loss of data
+D:\Documents\Cpp projects\lox3\Expression\VM.cpp(139,49): warning C4244: 'argument': conversion from '__int64' to 'int', possible loss of data
+D:\Documents\Cpp projects\lox3\Expression\VM.cpp(194,16): warning C4834: discarding return value of function with 'nodiscard' attribute
+D:\Documents\Cpp projects\lox3\Expression\VM.cpp(178): warning C4715: 'VM::run': not all control paths return a value
   Expression.vcxproj -> D:\Documents\Cpp projects\lox3\Expression\x64\Debug\Expression.exe
   Copies ANTLR DLL to output directory
   0 File(s) copied

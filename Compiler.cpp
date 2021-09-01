@@ -10,13 +10,14 @@ void Compiler::enterPrimary(loxParser::PrimaryContext* ctx)
     if (ctx->children.size() == 1)              // if Primary is not a grouping
     {
         int startLine = ctx->getStart()->getLine();
+        // std::cout << "type: " << ctx->getStart()->getType() << " line: " << startLine << std::endl;
 
         switch (ctx->getStart()->getType())
         {
-        case 30: chunk->WriteChunk(OP_TRUE, startLine); break;
-        case 31: chunk->WriteChunk(OP_FALSE, startLine); break;
-        case 32: chunk->WriteChunk(OP_NIL, startLine); break;
-        case 36:
+        case 30: chunk->WriteChunk(OP_TRUE, startLine); break;  // true
+        case 31: chunk->WriteChunk(OP_FALSE, startLine); break; // false
+        case 32: chunk->WriteChunk(OP_NIL, startLine); break;   // nil
+        case 36:                                                // number
         {
             double v = std::stod(ctx->getText());
 
@@ -26,7 +27,7 @@ void Compiler::enterPrimary(loxParser::PrimaryContext* ctx)
             break;
         }
 
-        case 37:
+        case 37:                                                // string
         {
             std::string* text = new std::string(ctx->getText()); // create a new string on the heap because otherwise it will get dealocated automatically
             text->substr(1, text->size() - 2);         // zabeta bel parser
@@ -35,6 +36,14 @@ void Compiler::enterPrimary(loxParser::PrimaryContext* ctx)
             chunk->WriteChunk(OP_CONSTANT, startLine);
             chunk->WriteChunk(constant, startLine);
             break;
+        }
+
+        case 38:                                                // identifier aka variable name
+        {
+            std::string* text = new std::string(ctx->getText());
+            uint8_t constant = chunk->addConstant(Value(text));
+            chunk->WriteChunk(OP_GET_GLOBAL, startLine);
+            chunk->WriteChunk(constant, startLine);
         }
 
         default:
@@ -186,6 +195,25 @@ void Compiler::enterIfStmt(loxParser::IfStmtContext* ctx)
 }
 
 
+void Compiler::exitVarDecl(loxParser::VarDeclContext* ctx)
+{
+    int line = ctx->getStart()->getLine();
+
+    if (ctx->children.size() > 2)
+    {
+        if (!ctx->expression())
+        {
+            chunk->WriteChunk(OP_NIL, line);
+        }
+
+        std::string* text = new std::string(ctx->children[1]->getText());
+        uint8_t constant = chunk->addConstant(Value(text));
+        chunk->WriteChunk(OP_DEFINE_GLOBAL, line);
+        chunk->WriteChunk(constant, line);
+    }
+}
+
+
 void Compiler::exitPrintStmt(loxParser::PrintStmtContext* ctx)
 {
     chunk->WriteChunk(OP_PRINT, ctx->getStart()->getLine());
@@ -209,6 +237,6 @@ void Compiler::exitProgram(loxParser::ProgramContext* ctx)
     vm->interpret(chunk);
     printf("\n\n");
     Debug::disassembleChunk(chunk, "test chunk");
-    
+    Debug::PrintGlobalTable(vm->getGlobal());
     delete vm;
 }

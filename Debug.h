@@ -1,7 +1,8 @@
 #pragma once
 
 #include "chunk.h"
-
+#include "VM.h"
+#include <map>
 
 class Debug
 {
@@ -14,5 +15,6 @@ public:
 	static void disassembleChunk(Chunk* chunk, const char* name);
 	static void PrintStack(std::vector<Value> v);
 	static int disassembleInstruction(Chunk* chunk, int offset);
+	static void PrintGlobalTable(std::map<std::string, Value> GlobalTable);
 };
 

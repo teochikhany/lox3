@@ -18,6 +18,7 @@ public:
 
 	void enterIfStmt(loxParser::IfStmtContext* ctx) override;
 	void enterExpression(loxParser::ExpressionContext* ctx) override;
+	void exitVarDecl(loxParser::VarDeclContext* ctx) override;
 
 	void exitPrintStmt(loxParser::PrintStmtContext* ctx) override;
 

@@ -20,6 +20,8 @@ enum OpCode : uint8_t {
 	OP_JUMP_IF_FALSE,
 	OP_JUMP,
 	OP_PRINT,
+	OP_DEFINE_GLOBAL,
+	OP_GET_GLOBAL,
 	OP_RETURN
 };
 

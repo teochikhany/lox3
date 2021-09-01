@@ -134,8 +134,38 @@ InterpretResult VM::run() {
             break;
         }
 
+        case OP_JUMP:
+        {
+            uint8_t offset = chunk->getCode((ip - chunk->getAddCode(0)));
+            ip++;   // to make the vm skip the "jump offset"
+            ip += offset - 1;
+            break;
+        }
+
+        case OP_DEFINE_GLOBAL:
+        {
+            //Value constant = chunk->getConst(*ip++).getString();
+            std::string VariableName = chunk->getConst(*ip++).getString();
+            GlobalTable[VariableName] = pop();
+            break;
+        }
+
+        case OP_GET_GLOBAL:
+        {
+            std::string VariableName = chunk->getConst(*ip++).getString();
+
+            auto it = GlobalTable.find(VariableName);
+            if (it == GlobalTable.end())
+            {
+                std::cout << "Undefined Variable " << VariableName << std::endl;
+                break;
+            }
+            push(Value(it->second));
+            break;
+        }
+
         case OP_RETURN:
-            std::cout << " \t\t " << pop().Print() << std::endl;
+            //std::cout << " \t\t " << pop().Print() << std::endl;
             return InterpretResult::INTERPRET_OK;
 
         default:
@@ -167,4 +197,10 @@ void VM::resetStack()
 Value VM::peek(int distance)
 {
     return stack[stack.size() - 1 - distance];
+}
+
+
+std::map<std::string, Value> VM::getGlobal()
+{
+    return GlobalTable;
 }
