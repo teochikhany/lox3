@@ -164,6 +164,20 @@ InterpretResult VM::run() {
             break;
         }
 
+        case OP_SET_GLOBAL:
+        {
+            std::string VariableName = chunk->getConst(*ip++).getString();
+
+            auto it = GlobalTable.find(VariableName);
+            if (it == GlobalTable.end())
+            {
+                std::cout << "Undefined Variable " << VariableName << std::endl;
+                break;
+            }
+            GlobalTable[VariableName] = pop();
+            break;
+        }
+
         case OP_RETURN:
             //std::cout << " \t\t " << pop().Print() << std::endl;
             return InterpretResult::INTERPRET_OK;

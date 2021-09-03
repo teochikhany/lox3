@@ -214,6 +214,20 @@ void Compiler::exitVarDecl(loxParser::VarDeclContext* ctx)
 }
 
 
+void Compiler::exitAssignment(loxParser::AssignmentContext* ctx)
+{
+    int line = ctx->getStart()->getLine();
+
+    if (ctx->children.size() > 2)
+    {
+        std::string* text = new std::string(ctx->children[0]->getText());
+        uint8_t constant = chunk->addConstant(Value(text));
+        chunk->WriteChunk(OP_SET_GLOBAL, line);
+        chunk->WriteChunk(constant, line);
+    }
+}
+
+
 void Compiler::exitPrintStmt(loxParser::PrintStmtContext* ctx)
 {
     chunk->WriteChunk(OP_PRINT, ctx->getStart()->getLine());

@@ -252,8 +252,8 @@ D:\Documents\Cpp projects\lox3\Expression\include\tree\xpath\XPathElement.h(34,2
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29910\include\xstring(4648): message : see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
 D:\Documents\Cpp projects\lox3\Expression\VM.cpp(129,49): warning C4244: 'argument': conversion from '__int64' to 'int', possible loss of data
 D:\Documents\Cpp projects\lox3\Expression\VM.cpp(139,49): warning C4244: 'argument': conversion from '__int64' to 'int', possible loss of data
-D:\Documents\Cpp projects\lox3\Expression\VM.cpp(194,16): warning C4834: discarding return value of function with 'nodiscard' attribute
-D:\Documents\Cpp projects\lox3\Expression\VM.cpp(178): warning C4715: 'VM::run': not all control paths return a value
+D:\Documents\Cpp projects\lox3\Expression\VM.cpp(208,16): warning C4834: discarding return value of function with 'nodiscard' attribute
+D:\Documents\Cpp projects\lox3\Expression\VM.cpp(192): warning C4715: 'VM::run': not all control paths return a value
   Expression.vcxproj -> D:\Documents\Cpp projects\lox3\Expression\x64\Debug\Expression.exe
   Copies ANTLR DLL to output directory
   0 File(s) copied
