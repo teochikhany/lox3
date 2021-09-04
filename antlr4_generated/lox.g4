@@ -38,11 +38,11 @@ assignment	: ( call '.' )? IDENTIFIER '=' assignment
 
 logic_or	: logic_and ( 'or' logic_and )* ;
 logic_and	: equality ( 'and' equality )* ;
-equality	: comparison ( ( '!=' | '==' ) comparison )* ;
-comparison	: term ( ( '>' | '>=' | '<' | '<=' ) term )* ;
+equality	: comparison ( sign=( '!=' | '==' ) comparison )* ;
+comparison	: term ( sign=( '>' | '>=' | '<' | '<=' ) term )* ;
 
-term		: term ( '*' | '/' ) term 
-		| term ( '+' | '-' ) term
+term		: term sign=( '*' | '/' ) term 
+		| term sign=( '+' | '-' ) term
 		| unary ;
 
 

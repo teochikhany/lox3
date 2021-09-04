@@ -1570,11 +1570,12 @@ loxParser::EqualityContext* loxParser::equality() {
 
     || _la == loxParser::T__20) {
       setState(189);
+      dynamic_cast<EqualityContext *>(_localctx)->sign = _input->LT(1);
       _la = _input->LA(1);
       if (!(_la == loxParser::T__19
 
       || _la == loxParser::T__20)) {
-      _errHandler->recoverInline(this);
+        dynamic_cast<EqualityContext *>(_localctx)->sign = _errHandler->recoverInline(this);
       }
       else {
         _errHandler->reportMatch(this);
@@ -1653,13 +1654,14 @@ loxParser::ComparisonContext* loxParser::comparison() {
       | (1ULL << loxParser::T__22)
       | (1ULL << loxParser::T__23))) != 0)) {
       setState(197);
+      dynamic_cast<ComparisonContext *>(_localctx)->sign = _input->LT(1);
       _la = _input->LA(1);
       if (!((((_la & ~ 0x3fULL) == 0) &&
         ((1ULL << _la) & ((1ULL << loxParser::T__1)
         | (1ULL << loxParser::T__21)
         | (1ULL << loxParser::T__22)
         | (1ULL << loxParser::T__23))) != 0))) {
-      _errHandler->recoverInline(this);
+        dynamic_cast<ComparisonContext *>(_localctx)->sign = _errHandler->recoverInline(this);
       }
       else {
         _errHandler->reportMatch(this);
@@ -1764,11 +1766,12 @@ loxParser::TermContext* loxParser::term(int precedence) {
 
           if (!(precpred(_ctx, 3))) throw FailedPredicateException(this, "precpred(_ctx, 3)");
           setState(208);
+          dynamic_cast<TermContext *>(_localctx)->sign = _input->LT(1);
           _la = _input->LA(1);
           if (!(_la == loxParser::T__24
 
           || _la == loxParser::T__25)) {
-          _errHandler->recoverInline(this);
+            dynamic_cast<TermContext *>(_localctx)->sign = _errHandler->recoverInline(this);
           }
           else {
             _errHandler->reportMatch(this);
@@ -1786,11 +1789,12 @@ loxParser::TermContext* loxParser::term(int precedence) {
 
           if (!(precpred(_ctx, 2))) throw FailedPredicateException(this, "precpred(_ctx, 2)");
           setState(211);
+          dynamic_cast<TermContext *>(_localctx)->sign = _input->LT(1);
           _la = _input->LA(1);
           if (!(_la == loxParser::T__26
 
           || _la == loxParser::T__27)) {
-          _errHandler->recoverInline(this);
+            dynamic_cast<TermContext *>(_localctx)->sign = _errHandler->recoverInline(this);
           }
           else {
             _errHandler->reportMatch(this);

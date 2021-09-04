@@ -333,6 +333,7 @@ public:
 
   class  EqualityContext : public antlr4::ParserRuleContext {
   public:
+    antlr4::Token *sign = nullptr;
     EqualityContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<ComparisonContext *> comparison();
@@ -347,6 +348,7 @@ public:
 
   class  ComparisonContext : public antlr4::ParserRuleContext {
   public:
+    antlr4::Token *sign = nullptr;
     ComparisonContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<TermContext *> term();
@@ -361,6 +363,7 @@ public:
 
   class  TermContext : public antlr4::ParserRuleContext {
   public:
+    antlr4::Token *sign = nullptr;
     TermContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     UnaryContext *unary();

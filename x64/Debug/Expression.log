@@ -252,18 +252,16 @@ D:\Documents\Cpp projects\lox3\Expression\include\tree\xpath\XPathElement.h(34,2
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29910\include\xstring(4648): message : see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
 D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(12,51): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
 D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(33,17): warning C4834: discarding return value of function with 'nodiscard' attribute
-D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(57,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(76,46): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(77,54): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(115,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(116,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(130,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(149,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(171,69): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(200,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(219,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(233,59): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(245,60): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(62,46): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(83,46): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(108,46): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(127,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(146,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(168,69): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(197,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(216,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(230,59): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(242,60): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   Expression.vcxproj -> D:\Documents\Cpp projects\lox3\Expression\x64\Debug\Expression.exe
   Copies ANTLR DLL to output directory
   0 File(s) copied

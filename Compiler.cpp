@@ -54,15 +54,17 @@ void Compiler::enterPrimary(loxParser::PrimaryContext* ctx)
 
 void Compiler::exitEquality(loxParser::EqualityContext* ctx)
 {
-    //int line = ctx->start->getLine();
-    int line = ctx->getStart()->getLine();
+    // 21 == 
+    // 20 !=
 
     if (ctx->children.size() == 3)
     {
-        switch (ctx->children[1]->getText()[0])     // maybe to get the ->getType function i need to define it as a token and not just insert the text int he .g4 file
+        int line = ctx->getStart()->getLine();
+
+        switch (ctx->sign->getType())
         {
-        case '=': chunk->WriteChunk(OP_EQUAL, line); break;
-        case '!': chunk->WriteChunk(OP_EQUAL, line); chunk->WriteChunk(OP_NOT, line); break;
+        case 21: chunk->WriteChunk(OP_EQUAL, line); break;
+        case 20: chunk->WriteChunk(OP_EQUAL, line); chunk->WriteChunk(OP_NOT, line); break;
         default:
             return;
         }
@@ -71,39 +73,25 @@ void Compiler::exitEquality(loxParser::EqualityContext* ctx)
 
 void Compiler::exitComparison(loxParser::ComparisonContext* ctx)
 {
+    // >  22
+    // >= 23
+    // <  2
+    // <= 24
 
     if (ctx->children.size() == 3)
     {
         int line = ctx->getStart()->getLine();
-        int size = ctx->children[1]->getText().size();
 
-        // should change this with ->getType after fixing the .g4 antlr file with proper tokens
-        switch (ctx->children[1]->getText()[0])     // maybe to get the ->getType function i need to define it as a token and not just insert the text int he .g4 file
+        switch (ctx->sign->getType())
         {
-        case '<': 
-        {
-            if (size == 1)
-            {
-                chunk->WriteChunk(OP_LESS, line); break;
-            }
-            else
-            {
-                chunk->WriteChunk(OP_GREATER, line); chunk->WriteChunk(OP_NOT, line); break;
-            }
-        }
-
-        case '>': 
-        {
-            if (size == 1)
-            {
-                chunk->WriteChunk(OP_GREATER, line); break;
-            }
-            else
-            {
-                chunk->WriteChunk(OP_LESS, line); chunk->WriteChunk(OP_NOT, line); break;
-            }
-        }
-
+        case 2:
+            chunk->WriteChunk(OP_LESS, line); break;
+        case 24:
+            chunk->WriteChunk(OP_GREATER, line); chunk->WriteChunk(OP_NOT, line); break;
+        case 22:
+            chunk->WriteChunk(OP_GREATER, line); break;
+        case 23:
+            chunk->WriteChunk(OP_LESS, line); chunk->WriteChunk(OP_NOT, line); break;
         default:
             return;
         }
@@ -112,33 +100,41 @@ void Compiler::exitComparison(loxParser::ComparisonContext* ctx)
 
 void Compiler::exitUnary(loxParser::UnaryContext* ctx)
 {
+    // 28 -
+    // 29 !
 
-    int type = ctx->getStart()->getType();
-    int line = ctx->getStart()->getLine();
+    if (ctx->children.size() > 1)
+    {
+        int line = ctx->getStart()->getLine();
 
-    if (type == 25) // this may break in the future ?? may use get Text
-    {
-        chunk->WriteChunk(OP_NEGATE, line);
-    }
-    else if (type == 29) 
-    {
-        chunk->WriteChunk(OP_NOT, line);
+        switch (ctx->start->getType())
+        {
+        case 28:
+            chunk->WriteChunk(OP_NEGATE, line); break;
+        case 29:
+            chunk->WriteChunk(OP_NOT, line); break;
+        }
     }
 }
 
 void Compiler::exitTerm(loxParser::TermContext* ctx)
 {
+    // * 25
+    // + 27
+    // - 28
+    // / 26
+
     int line = ctx->getStart()->getLine();
 
     if (ctx->children.size() == 3)                  // if Term is not just a primary
     {
-        // maybe to get the ->getType function i need to define it as a token and not just insert the text in the .g4 file
-        switch (ctx->children[1]->getText()[0])
+        switch (ctx->sign->getType())
         {
-        case '*': chunk->WriteChunk(OP_MULTIPLY, line); break;
-        case '+': chunk->WriteChunk(OP_ADD, line); break;
-        case '-': chunk->WriteChunk(OP_SUBTRACT, line); break;
-        case '/': chunk->WriteChunk(OP_DIVIDE, line); break;
+        case 25: chunk->WriteChunk(OP_MULTIPLY, line); break;
+        case 26: chunk->WriteChunk(OP_DIVIDE, line); break;
+        case 27: chunk->WriteChunk(OP_ADD, line); break;
+        case 28: chunk->WriteChunk(OP_SUBTRACT, line); break;
+
         default:
             return;
         }
