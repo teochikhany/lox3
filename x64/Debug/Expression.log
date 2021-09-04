@@ -1,4 +1,4 @@
-﻿  VM.cpp
+﻿  Compiler.cpp
 D:\Documents\Cpp projects\lox3\Expression\include\Exceptions.h(15,25): warning C4251: 'antlr4::RuntimeException::_message': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'antlr4::RuntimeException'
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29910\include\xstring(4648): message : see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
 D:\Documents\Cpp projects\lox3\Expression\include\Exceptions.h(75,25): warning C4251: 'antlr4::IOException::_message': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'antlr4::IOException'
@@ -250,10 +250,20 @@ D:\Documents\Cpp projects\lox3\Expression\include\tree\xpath\XPath.h(75,22): war
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29910\include\xstring(4648): message : see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
 D:\Documents\Cpp projects\lox3\Expression\include\tree\xpath\XPathElement.h(34,26): warning C4251: 'antlr4::tree::xpath::XPathElement::_nodeName': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'antlr4::tree::xpath::XPathElement'
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29910\include\xstring(4648): message : see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
-D:\Documents\Cpp projects\lox3\Expression\VM.cpp(129,49): warning C4244: 'argument': conversion from '__int64' to 'int', possible loss of data
-D:\Documents\Cpp projects\lox3\Expression\VM.cpp(139,49): warning C4244: 'argument': conversion from '__int64' to 'int', possible loss of data
-D:\Documents\Cpp projects\lox3\Expression\VM.cpp(208,16): warning C4834: discarding return value of function with 'nodiscard' attribute
-D:\Documents\Cpp projects\lox3\Expression\VM.cpp(192): warning C4715: 'VM::run': not all control paths return a value
+D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(12,51): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(33,17): warning C4834: discarding return value of function with 'nodiscard' attribute
+D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(57,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(76,46): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(77,54): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(115,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(116,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(130,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(149,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(171,69): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(200,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(219,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(233,59): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(245,60): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   Expression.vcxproj -> D:\Documents\Cpp projects\lox3\Expression\x64\Debug\Expression.exe
   Copies ANTLR DLL to output directory
   0 File(s) copied

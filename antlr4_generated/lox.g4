@@ -57,7 +57,7 @@ parameters	: IDENTIFIER ( ',' IDENTIFIER )* ;
 arguments	: expression ( ',' expression )* ;
 
 NUMBER		: DIGIT+ ( '.' DIGIT+ )? ;
-STRING		: '"' (ALPHA | DIGIT)*  '"' ;
+STRING		: '"' (ALPHA | DIGIT | ' ')*  '"' ;
 IDENTIFIER	: ALPHA ( ALPHA | DIGIT )* ;
 ALPHA		: [a-zA-Z_] ;
 DIGIT		: [0-9] ;

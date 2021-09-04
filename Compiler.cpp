@@ -54,6 +54,7 @@ void Compiler::enterPrimary(loxParser::PrimaryContext* ctx)
 
 void Compiler::exitEquality(loxParser::EqualityContext* ctx)
 {
+    //int line = ctx->start->getLine();
     int line = ctx->getStart()->getLine();
 
     if (ctx->children.size() == 3)

@@ -46,6 +46,6 @@ public:
 	Value getConst(int offset);						// get the element at index "offset" of vector "constants"
 
 	int getLine(int offset);	// bug lama ma ektob return, beta3mol runtime error, vector out of bound
-								// ymkn bas lama yi koun fi 1 line bel chunk
+								//// ymkn bas lama yi koun fi 1 line bel chunk
 };
 
