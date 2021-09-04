@@ -2,8 +2,21 @@
 
 A byte code interpreter for the language lox, based on [this book](https://craftinginterpreters.com/)
 
-To - Do's
-- Add while statement support
-- Add local variables support
+The Lexer and Parser are done using ANTLR4.
+The code generation and VM are custom made.
+
+## Features
+
+- [x] Dynamique Values
+- [x] Double - Bool - String values
+- [x] Global Variables
+- [ ] Local Variables
+- [x] If-else statements
+- [ ] While Statements
+- [ ] For statements
+- [ ] Functions
+
+
+## To - Do's
 - Optimise how global variables are referenced
-- optimise how line are stored
+- Optimise how line are stored
