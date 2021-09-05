@@ -13,7 +13,7 @@ The code generation and VM are custom made.
 - [ ] Local Variables
 - [x] Print Statement
 - [x] If-else Statement
-- [ ] While Statement
+- [x] While Statement
 - [ ] For statement
 - [ ] Functions
 

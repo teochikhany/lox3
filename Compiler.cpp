@@ -192,6 +192,39 @@ void Compiler::enterIfStmt(loxParser::IfStmtContext* ctx)
 }
 
 
+void Compiler::enterWhileStmt(loxParser::WhileStmtContext* ctx)
+{
+    int loopStart = chunk->getSize() - 1;
+    int line = ctx->getStart()->getLine();
+
+    // walking the While condition
+    auto WhileCondition = ctx->expression();
+    Helper::Walk(this, WhileCondition);
+
+    // writing the jump with a fake offset
+    chunk->WriteChunk(OP_JUMP_IF_FALSE, line);
+    chunk->WriteChunk(0xff, line);
+
+    int old_size = chunk->getSize() - 1;
+
+    // Walking the block inside the While
+    auto WhileStatement = ctx->statement();
+    Helper::Walk(this, WhileStatement);
+
+    chunk->WriteChunk(OP_LOOP, line);
+    chunk->WriteChunk(chunk->getSize() - 1 - loopStart + 2, line);
+
+    // patching the OP_JUMP_IF_FALSE
+    chunk->WriteChunkOffset(chunk->getSize() - old_size, old_size);
+
+    // removing all the children, because i already processed them in the code above
+    while (ctx->children.size() > 0)
+    {
+        ctx->removeLastChild();
+    }
+}
+
+
 void Compiler::exitVarDecl(loxParser::VarDeclContext* ctx)
 {
     int line = ctx->getStart()->getLine();

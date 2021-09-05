@@ -142,6 +142,14 @@ InterpretResult VM::run() {
             break;
         }
 
+        case OP_LOOP:
+        {
+            uint8_t offset = chunk->getCode((ip - chunk->getAddCode(0)));
+            ip++;   // to make the vm skip the "jump offset"
+            ip -= offset - 1;
+            break;
+        }
+
         case OP_DEFINE_GLOBAL:
         {
             //Value constant = chunk->getConst(*ip++).getString();

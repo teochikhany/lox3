@@ -98,7 +98,7 @@ D:\Documents\Cpp projects\lox3\Expression\include\antlr4-common.h(139): message 
 D:\Documents\Cpp projects\lox3\Expression\include\Parser.h(412,40): warning C4251: 'antlr4::Parser::_errHandler': class 'std::shared_ptr<antlr4::ANTLRErrorStrategy>' needs to have dll-interface to be used by clients of class 'antlr4::Parser'
 D:\Documents\Cpp projects\lox3\Expression\include\antlr4-common.h(139): message : see declaration of 'std::shared_ptr<antlr4::ANTLRErrorStrategy>'
 D:\Documents\Cpp projects\lox3\Expression\include\Parser.h(421,38): warning C4251: 'antlr4::Parser::_precedenceStack': class 'std::vector<int,std::allocator<int>>' needs to have dll-interface to be used by clients of class 'antlr4::Parser'
-D:\Documents\Cpp projects\lox3\Expression\Chunk.h(35): message : see declaration of 'std::vector<int,std::allocator<int>>'
+D:\Documents\Cpp projects\lox3\Expression\Chunk.h(36): message : see declaration of 'std::vector<int,std::allocator<int>>'
 D:\Documents\Cpp projects\lox3\Expression\include\Parser.h(434,59): warning C4251: 'antlr4::Parser::_parseListeners': class 'std::vector<antlr4::tree::ParseTreeListener *,std::allocator<antlr4::tree::ParseTreeListener *>>' needs to have dll-interface to be used by clients of class 'antlr4::Parser'
 D:\Documents\Cpp projects\lox3\Expression\include\Parser.h(128): message : see declaration of 'std::vector<antlr4::tree::ParseTreeListener *,std::allocator<antlr4::tree::ParseTreeListener *>>'
 D:\Documents\Cpp projects\lox3\Expression\include\Parser.h(455,72): warning C4251: 'antlr4::Parser::bypassAltsAtnCache': class 'std::map<std::vector<uint16_t,std::allocator<uint16_t>>,antlr4::atn::ATN,std::less<std::vector<uint16_t,std::allocator<uint16_t>>>,std::allocator<std::pair<const std::vector<uint16_t,std::allocator<uint16_t>>,antlr4::atn::ATN>>>' needs to have dll-interface to be used by clients of class 'antlr4::Parser'
@@ -258,10 +258,11 @@ D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(108,46): warning C4267: '
 D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(127,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
 D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(146,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
 D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(168,69): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(197,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(216,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(230,59): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(242,60): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(198,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(230,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(249,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(263,59): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\Documents\Cpp projects\lox3\Expression\Compiler.cpp(275,60): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   Expression.vcxproj -> D:\Documents\Cpp projects\lox3\Expression\x64\Debug\Expression.exe
   Copies ANTLR DLL to output directory
   0 File(s) copied

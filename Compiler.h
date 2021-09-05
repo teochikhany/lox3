@@ -17,6 +17,7 @@ public:
 	void exitComparison(loxParser::ComparisonContext* ctx) override;
 
 	void enterIfStmt(loxParser::IfStmtContext* ctx) override;
+	void enterWhileStmt(loxParser::WhileStmtContext* ctx) override;
 	void enterExpression(loxParser::ExpressionContext* ctx) override;
 	void exitVarDecl(loxParser::VarDeclContext* ctx) override;
 	void exitAssignment(loxParser::AssignmentContext* ctx) override;
