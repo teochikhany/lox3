@@ -1,6 +1,6 @@
 # lox3
 
-A byte code interpreter for the language lox, based on [this book](https://craftinginterpreters.com/)
+A Stack based, byte code interpreter for the language lox, based on [this book](https://craftinginterpreters.com/)
 
 The Lexer and Parser are done using ANTLR4.
 The code generation and VM are custom made.
