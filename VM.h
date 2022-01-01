@@ -31,5 +31,6 @@ public:
 	// InterpretResult interpret(const char* source);
 	InterpretResult interpret(Chunk* chunk);
 	std::map<std::string, Value> getGlobal();
+	std::vector<Value> getStack();
 };
 

@@ -1,8 +1,9 @@
+#pragma once
+
 #include "Chunk.h"
 #include "antlr4_generated/loxBaseListener.h"
 #include "antlr4_generated/loxBaseListener.cpp"
 
-#pragma once
 
 class Compiler : public loxBaseListener
 {

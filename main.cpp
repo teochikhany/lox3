@@ -24,7 +24,6 @@ void Helper::Walk(antlr4::tree::ParseTreeListener* t, antlr4::tree::ParseTree* t
     tree::ParseTreeWalker::DEFAULT.walk(t, t2);
 }
 
-
 int main(int argc, const char* argv[]) {
 
     // Provide the input text in a stream

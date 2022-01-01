@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GtaTestDurations xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Executable>D:\Documents\Github\lox3\x64\Debug\UnitTest.exe</Executable>
+  <TestDurations>
+    <TestDuration Test="TestCaseName.TestName" Duration="1" />
+    <TestDuration Test="teo.chikhany" Duration="1" />
+    <TestDuration Test="teo2.chikhany" Duration="7" />
+    <TestDuration Test="arithmatique.addition" Duration="6" />
+  </TestDurations>
+</GtaTestDurations>
