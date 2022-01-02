@@ -1,5 +1,4 @@
-﻿  pch.cpp
-  test.cpp
+﻿  test.cpp
 D:\Documents\Github\lox3\include\Exceptions.h(15,25): warning C4251: 'antlr4::RuntimeException::_message': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'antlr4::RuntimeException'
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29910\include\xstring(4648): message : see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
 D:\Documents\Github\lox3\include\Exceptions.h(75,25): warning C4251: 'antlr4::IOException::_message': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'antlr4::IOException'

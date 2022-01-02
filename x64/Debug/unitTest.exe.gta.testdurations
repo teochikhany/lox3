@@ -6,5 +6,13 @@
     <TestDuration Test="teo.chikhany" Duration="1" />
     <TestDuration Test="teo2.chikhany" Duration="7" />
     <TestDuration Test="arithmatique.addition" Duration="6" />
+    <TestDuration Test="arithmatique.multiplication" Duration="2" />
+    <TestDuration Test="arithmatique.substraction_negative" Duration="1" />
+    <TestDuration Test="arithmatique.substraction" Duration="1" />
+    <TestDuration Test="arithmatique.addition_negative" Duration="1" />
+    <TestDuration Test="arithmatique.multiplication_negative" Duration="1" />
+    <TestDuration Test="arithmatique.addition_negative_2" Duration="1" />
+    <TestDuration Test="arithmatique.order_precendence" Duration="9" />
+    <TestDuration Test="arithmatique.order_precendence_2" Duration="3" />
   </TestDurations>
 </GtaTestDurations>
