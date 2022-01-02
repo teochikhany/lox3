@@ -13,7 +13,7 @@ private:
 
 public:
 	static void disassembleChunk(Chunk* chunk, const char* name);
-	static void PrintStack(std::vector<Value> v);
+	static void PrintValues(std::vector<Value> v, std::string name = "\tStack: ");
 	static int disassembleInstruction(Chunk* chunk, int offset);
 	static void PrintGlobalTable(std::map<std::string, Value> GlobalTable);
 };

@@ -103,9 +103,10 @@ int Debug::ConstantInstruction(const char* name, Chunk* chunk, int offset)
 	return offset + 2;
 }
 
-void Debug::PrintStack(std::vector<Value> d)
+void Debug::PrintValues(std::vector<Value> d, std::string name)
 {
-	printf("          ");
+	//printf("          ");
+	printf(name.c_str());
 
 	if (d.size() == 0)
 		printf("[]");

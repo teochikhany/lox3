@@ -50,3 +50,9 @@ int Chunk::getLine(int i)
 {
 	return lines[i];
 }
+
+
+std::vector<Value> Chunk::getConstants()
+{
+	return constants;
+}

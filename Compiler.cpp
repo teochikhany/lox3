@@ -280,7 +280,12 @@ void Compiler::exitProgram(loxParser::ProgramContext* ctx)
     VM* vm = new VM();
     vm->interpret(chunk);
     printf("\n\n");
+
+#ifdef _DEBUG
     Debug::disassembleChunk(chunk, "test chunk");
     Debug::PrintGlobalTable(vm->getGlobal());
+    Debug::PrintValues(vm->getChunkValues(), "\nChunk Values: ");
+#endif // 
+
     delete vm;
 }

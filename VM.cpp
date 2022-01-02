@@ -62,9 +62,10 @@ InterpretResult VM::run() {
             break;
         }
 
-        Debug::PrintStack(stack);
+#ifdef _DEBUG
+        Debug::PrintValues(stack);
         Debug::disassembleInstruction(chunk, (int)(ip - chunk->getAddCode(0)));
-
+#endif // 
 
         uint8_t instruction;
 
@@ -230,4 +231,9 @@ std::map<std::string, Value> VM::getGlobal()
 std::vector<Value> VM::getStack()
 {
     return stack;
+}
+
+std::vector<Value> VM::getChunkValues()
+{
+    return chunk->getConstants();
 }
