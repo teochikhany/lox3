@@ -226,3 +226,8 @@ std::map<std::string, Value> VM::getGlobal()
 {
     return GlobalTable;
 }
+
+std::vector<Value> VM::getStack()
+{
+    return stack;
+}

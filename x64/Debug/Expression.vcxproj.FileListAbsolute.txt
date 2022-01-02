@@ -1,2 +1,0 @@
-D:\Download_D\Expression_vs\Expression\x64\Debug\Expression.exe
-D:\Documents\Cpp projects\lox3\Expression\x64\Debug\Expression.exe

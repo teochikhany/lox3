@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="..\Chunk.cpp">
+      <Filter>External Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Compiler.cpp">
+      <Filter>External Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Debug.cpp">
+      <Filter>External Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Value.cpp">
+      <Filter>External Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\VM.cpp">
+      <Filter>External Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="arithmatique.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="control_flow.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="variables.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="types.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\antlr4_generated\loxLexer.cpp">
+      <Filter>External Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\antlr4_generated\loxParser.cpp">
+      <Filter>External Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="External Source Files">
+      <UniqueIdentifier>{1695b4e3-1ccb-4f1d-916a-f1ae9b02890c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests">
+      <UniqueIdentifier>{9c51386b-c810-4c36-b98a-3c2ae9ca07ad}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
