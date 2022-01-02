@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="External Source Files">
+      <UniqueIdentifier>{e7cc8394-e973-457c-b4d6-7949ee77972f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -35,6 +38,12 @@
     </ClCompile>
     <ClCompile Include="Obj.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="antlr4_generated\loxParser.cpp">
+      <Filter>External Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="antlr4_generated\loxLexer.cpp">
+      <Filter>External Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

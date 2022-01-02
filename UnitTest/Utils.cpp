@@ -1,10 +1,4 @@
-//
-// pch.cpp
-// Include the standard header and generate the precompiled header.
-//
-
-#include "pch.h"
-
+#include "Utils.h"
 
 
 Value custom_main_top_stack(std::string string_input)

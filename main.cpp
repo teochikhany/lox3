@@ -2,11 +2,8 @@
 
 #include "antlr4-runtime.h"
 
-#include "antlr4_generated/loxLexer.h"
-#include "antlr4_generated/loxParser.h"
-
-#include "antlr4_generated/loxLexer.cpp"
-#include "antlr4_generated/loxParser.cpp"
+#include "loxLexer.h"
+#include "loxParser.h"
 
 #include "main.h"
 #include "Chunk.h"
@@ -17,7 +14,7 @@
 
 void Helper::Walk(antlr4::tree::ParseTreeListener* t, antlr4::tree::ParseTree* t2)
 {
-    tree::ParseTreeWalker::DEFAULT.walk(t, t2);
+    antlr4::tree::ParseTreeWalker::DEFAULT.walk(t, t2);
 }
 
 int main(int argc, const char* argv[]) {
@@ -37,11 +34,11 @@ int main(int argc, const char* argv[]) {
     // Create a parser from the token stream
     loxParser parser(&tokens);
 
-    tree::ParseTree* tree = parser.program();
+    antlr4::tree::ParseTree* tree = parser.program();
 
     Chunk* chunk = new Chunk();
 
-    tree::ParseTreeWalker::DEFAULT.walk(new Compiler(chunk), tree);
+    antlr4::tree::ParseTreeWalker::DEFAULT.walk(new Compiler(chunk), tree);
 
     return 0;
 }
