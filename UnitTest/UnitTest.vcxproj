@@ -44,6 +44,7 @@
     <ClCompile Include="..\Value.cpp" />
     <ClCompile Include="..\VM.cpp" />
     <ClCompile Include="arithmatique.cpp" />
+    <ClCompile Include="comparaison.cpp" />
     <ClCompile Include="control_flow.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="main.cpp" />
