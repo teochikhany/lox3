@@ -3,13 +3,9 @@
 #include "antlr4-runtime.h"
 
 #include "antlr4_generated/loxLexer.h"
-#include "antlr4_generated/loxListener.h"
-#include "antlr4_generated/loxBaseListener.h"
 #include "antlr4_generated/loxParser.h"
 
 #include "antlr4_generated/loxLexer.cpp"
-#include "antlr4_generated/loxListener.cpp"
-#include "antlr4_generated/loxBaseListener.cpp"
 #include "antlr4_generated/loxParser.cpp"
 
 #include "main.h"
