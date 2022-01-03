@@ -1,5 +1,7 @@
 #pragma once
 
+#ifdef _DEBUG
+
 #include "chunk.h"
 #include "VM.h"
 #include <map>
@@ -18,3 +20,4 @@ public:
 	static void PrintGlobalTable(std::map<std::string, Value> GlobalTable);
 };
 
+#endif // 

@@ -1,3 +1,5 @@
+#ifdef _DEBUG
+
 #include "Debug.h"
 #include <iostream>
 
@@ -127,3 +129,5 @@ void Debug::PrintGlobalTable(std::map<std::string, Value> GlobalTable)
 		std::cout << x.first << ": " << x.second.Print() << std::endl;
 	}
 }
+
+#endif // 
