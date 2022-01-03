@@ -35,5 +35,7 @@ private:
 	Chunk* chunk;
 	std::vector<Local> locals;
 	int scopeDepth;
+
+	uint8_t localOffset(std::string name);
 };
 

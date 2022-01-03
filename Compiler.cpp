@@ -40,17 +40,28 @@ void Compiler::enterPrimary(loxParser::PrimaryContext* ctx)
 
         case 38:                                                // identifier aka variable name
         {
-            std::string* text = new std::string(ctx->getText());
-            uint8_t constant = chunk->getConstAdd(Value(text));
+            std::string* var_name = new std::string(ctx->getText());
 
-            if (constant == 255)
+            uint8_t local_index = localOffset(*var_name);
+
+            if (local_index == 255)     // global variable
             {
-                printf("Compilation Error at line %d: No variable with name \"%s\" is defined\n", startLine, text->c_str());
-                exit(1);
-            }
+                uint8_t constant = chunk->getConstAdd(Value(var_name));
 
-            chunk->WriteChunk(OP_GET_GLOBAL, startLine);
-            chunk->WriteChunk(constant, startLine);
+                if (constant == 255)
+                {
+                    printf("Compilation Error at line %d: No variable with name \"%s\" is defined\n", startLine, var_name->c_str());
+                    exit(1);
+                }
+
+                chunk->WriteChunk(OP_GET_GLOBAL, startLine);
+                chunk->WriteChunk(constant, startLine);
+            }
+            else    // local variable
+            {
+                chunk->WriteChunk(OP_GET_LOCAL, startLine);
+                chunk->WriteChunk(local_index, startLine);
+            }
         }
 
         default:
@@ -278,17 +289,29 @@ void Compiler::exitAssignment(loxParser::AssignmentContext* ctx)
 
     if (ctx->children.size() > 2)
     {
-        std::string* text = new std::string(ctx->children[0]->getText());
-        uint8_t constant = chunk->getConstAdd(Value(text));
+        std::string* var_name = new std::string(ctx->children[0]->getText());
 
-        if (constant == 255)
+        uint8_t local_index = localOffset(*var_name);
+
+        if (local_index == 255)
         {
-            printf("Compilation Error at line %d: No variable with name \"%s\" is defined\n", line, text->c_str());
-            exit(1);
+            uint8_t constant = chunk->getConstAdd(Value(var_name));
+
+            if (constant == 255)
+            {
+                printf("Compilation Error at line %d: No variable with name \"%s\" is defined\n", line, var_name->c_str());
+                exit(1);
+            }
+
+            chunk->WriteChunk(OP_SET_GLOBAL, line);
+            chunk->WriteChunk(constant, line);
+        }
+        else
+        {
+            chunk->WriteChunk(OP_SET_LOCAL, line);
+            chunk->WriteChunk(local_index, line);
         }
 
-        chunk->WriteChunk(OP_SET_GLOBAL, line);
-        chunk->WriteChunk(constant, line);
     }
 }
 
@@ -321,6 +344,22 @@ void Compiler::enterExpression(loxParser::ExpressionContext* ctx)
 
 }
 
+// fix this to return int and cast result to uint8_t in the calling function
+uint8_t Compiler::localOffset(std::string name)
+{
+    for (int i = locals.size() - 1; i >= 0; i--)
+    {
+        Local local = locals[i];
+        
+        if (local.getName() == name)
+        {
+            return i;
+        }
+    }
+
+    return 255;
+}
+
 
 void Compiler::exitReturnStmt(loxParser::ReturnStmtContext* ctx)
 {
@@ -337,6 +376,7 @@ void Compiler::exitProgram(loxParser::ProgramContext* ctx)
     Debug::disassembleChunk(chunk, "test chunk");
     Debug::PrintGlobalTable(vm->getGlobal());
     Debug::PrintValues(vm->getChunkValues(), "\nChunk Values: ");
+    Debug::PrintLocals(locals);
 #endif // 
 
     delete vm;

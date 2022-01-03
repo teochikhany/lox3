@@ -34,6 +34,8 @@ int Debug::disassembleInstruction(Chunk* chunk, int offset) {
 	{
 	case OP_CONSTANT:
 		return ConstantInstruction("OP_CONSTANT", chunk, offset);
+	case OP_POP:
+		return simpleInstruction("OP_POP", offset);
 	case OP_JUMP_IF_FALSE:
 		return doubleInstruction("OP_JUMP_IF_FALSE", chunk, offset);
 	case OP_LOOP:
@@ -75,9 +77,9 @@ int Debug::disassembleInstruction(Chunk* chunk, int offset) {
 	case OP_SET_GLOBAL:
 		return ConstantInstruction("OP_SET_GLOBAL", chunk, offset);
 	case OP_GET_LOCAL:
-		return ConstantInstruction("OP_GET_LOCAL", chunk, offset);
+		return doubleInstruction("OP_GET_LOCAL", chunk, offset);
 	case OP_SET_LOCAL:
-		return ConstantInstruction("OP_SET_LOCAL", chunk, offset);
+		return doubleInstruction("OP_SET_LOCAL", chunk, offset);
 	default:
 		printf("Unknown opcode %d\n", instruction);
 		return offset + 1;
@@ -94,7 +96,7 @@ int Debug::simpleInstruction(const char* name, int offset)
 int Debug::doubleInstruction(const char* name, Chunk* chunk, int offset)
 {
 	printf("%s\t", name);
-	printf("%d", chunk->getCode(offset + 1));
+	printf("%7d", chunk->getCode(offset + 1));
 	printf("\n");
 	return offset + 2;
 }
@@ -131,6 +133,16 @@ void Debug::PrintGlobalTable(std::map<std::string, Value> GlobalTable)
 	for (auto x : GlobalTable)
 	{
 		std::cout << x.first << ": " << x.second.Print() << std::endl;
+	}
+}
+
+
+void Debug::PrintLocals(std::vector<Local> locals)
+{
+	std::cout << "\nLocals: " << std::endl;
+	for (auto x : locals)
+	{
+		std::cout << x.print() << std::endl;
 	}
 }
 

@@ -12,4 +12,5 @@ public:
 	Local(std::string name, int depth);
 	int getDepth();
 	std::string getName();
+	std::string print();
 };

@@ -15,3 +15,8 @@ std::string Local::getName()
 {
 	return name;
 }
+
+std::string Local::print()
+{
+	return "Name: " + name + ", Depth: " + std::to_string(depth);
+}

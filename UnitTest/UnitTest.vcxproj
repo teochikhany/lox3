@@ -41,6 +41,7 @@
     <ClCompile Include="..\Chunk.cpp" />
     <ClCompile Include="..\Compiler.cpp" />
     <ClCompile Include="..\Debug.cpp" />
+    <ClCompile Include="..\Local.cpp" />
     <ClCompile Include="..\Value.cpp" />
     <ClCompile Include="..\VM.cpp" />
     <ClCompile Include="arithmatique.cpp" />

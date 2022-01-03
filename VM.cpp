@@ -226,9 +226,13 @@ void VM::push(Value value)
 
 Value VM::pop()
 {
-    Value d = stack.back();
-    stack.pop_back();
-    return d;
+    if (!stack.empty())
+    {
+        Value d = stack.back();
+        stack.pop_back();
+        return d;
+    }
+    return Value();
 }
 
 void VM::resetStack()
