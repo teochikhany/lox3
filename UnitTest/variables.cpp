@@ -94,3 +94,45 @@ TEST(global_var_get, string) {
     EXPECT_TRUE(topStack.isStr());
     EXPECT_EQ("\"variable\"", topStack.getString());
 }
+
+
+////////////////
+
+
+TEST(global_var_set, bool_true) {
+
+    Value topStack = custom_main_top_stack("var x = false; x = true; x;");
+    EXPECT_TRUE(topStack.isBool());
+    EXPECT_EQ(true, topStack.getBool());
+}
+
+
+TEST(global_var_set, bool_false) {
+
+    Value topStack = custom_main_top_stack("var x = true; x = false; x;");
+    EXPECT_TRUE(topStack.isBool());
+    EXPECT_EQ(false, topStack.getBool());
+}
+
+
+TEST(global_var_set, nil) {
+
+    Value topStack = custom_main_top_stack("var x = 4; x = nil; x;");
+    EXPECT_TRUE(topStack.isNil());
+}
+
+
+TEST(global_var_set, number) {
+
+    Value topStack = custom_main_top_stack("var x = 4.2; x = 2.5; x;");
+    EXPECT_TRUE(topStack.isNumber());
+    EXPECT_EQ(2.5, topStack.getDouble());
+}
+
+
+TEST(global_var_set, string) {
+
+    Value topStack = custom_main_top_stack("var x = \"set\"; x = \"variable\"; x;");
+    EXPECT_TRUE(topStack.isStr());
+    EXPECT_EQ("\"variable\"", topStack.getString());
+}
