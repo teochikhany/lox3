@@ -77,6 +77,11 @@ InterpretResult VM::run() {
             break;
         }
 
+        case OP_POP:
+        {
+            pop();
+        }
+
         case OP_PRINT:
         {
             std::cout << pop().Print() << std::endl;
