@@ -3,7 +3,6 @@
 #include "Chunk.h"
 #include "Local.h"
 #include "antlr4_generated/loxBaseListener.h"
-#include "antlr4_generated/loxBaseListener.cpp"		// can probably remove this
 
 #include <vector>
 
