@@ -139,10 +139,9 @@ void Debug::PrintGlobalTable(std::map<std::string, Value> GlobalTable)
 
 void Debug::PrintLocals(std::vector<Local> locals)
 {
-	std::cout << "\nLocals: " << std::endl;
 	for (auto x : locals)
 	{
-		std::cout << x.print() << std::endl;
+		std::cout << "[" << x.print() << "]" << std::endl;
 	}
 }
 

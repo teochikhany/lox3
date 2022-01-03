@@ -272,6 +272,11 @@ void Compiler::exitVarDecl(loxParser::VarDeclContext* ctx)
             }
 
             locals.push_back(Local(*text, scopeDepth));
+
+#ifdef _DEBUG
+            printf("Locals at scopeDepth of %d: ", scopeDepth);
+            Debug::PrintLocals(locals);
+#endif // 
         }
         else
         {
@@ -329,6 +334,11 @@ void Compiler::exitBlock(loxParser::BlockContext* ctx)
     {
         locals.pop_back();
         chunk->WriteChunk(OP_POP, ctx->getStop()->getLine());
+
+#ifdef _DEBUG
+        printf("Locals at scopeDepth of %d: ", scopeDepth);
+        Debug::PrintLocals(locals);
+#endif // 
     }
 }
 
@@ -369,14 +379,18 @@ void Compiler::exitReturnStmt(loxParser::ReturnStmtContext* ctx)
 void Compiler::exitProgram(loxParser::ProgramContext* ctx)
 {
     VM* vm = new VM();
-    vm->interpret(chunk);
-    printf("\n\n");
 
 #ifdef _DEBUG
+    printf("\n\n\nVM running output:");
+#endif // 
+
+    vm->interpret(chunk);
+
+#ifdef _DEBUG
+    printf("\n\n");
     Debug::disassembleChunk(chunk, "test chunk");
     Debug::PrintGlobalTable(vm->getGlobal());
     Debug::PrintValues(vm->getChunkValues(), "\nChunk Values: ");
-    Debug::PrintLocals(locals);
 #endif // 
 
     delete vm;
