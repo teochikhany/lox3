@@ -19,5 +19,5 @@ The code generation and VM are custom made.
 
 
 ## To - Do's
-- Optimise how global variables are referenced
-- Optimise how line are stored
+- [x] Optimize how global variables are referenced
+- [ ] Optimize how line are stored
