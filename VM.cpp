@@ -80,6 +80,7 @@ InterpretResult VM::run() {
         case OP_POP:
         {
             pop();
+            break;
         }
 
         case OP_PRINT:
@@ -196,6 +197,7 @@ InterpretResult VM::run() {
         {
             uint8_t offset = chunk->getCode((ip - chunk->getAddCode(0)));
             push(stack.at(offset));
+            ip++;
             break;
         }
 
@@ -203,6 +205,7 @@ InterpretResult VM::run() {
         {
             uint8_t offset = chunk->getCode((ip - chunk->getAddCode(0)));
             stack.at(offset) = Value(stack.back());
+            ip++;
             break;
         }
 
