@@ -44,6 +44,7 @@ public:
 	void WriteChunkOffset(uint8_t byte, int offset);
 
 	int addConstant(Value value);					// add a element to the end of the vector "constants"
+	uint8_t getConstAdd(Value value);
 	Value getConst(int offset);						// get the element at index "offset" of vector "constants"
 
 	int getLine(int offset);	// bug lama ma ektob return, beta3mol runtime error, vector out of bound

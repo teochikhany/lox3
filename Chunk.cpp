@@ -41,6 +41,19 @@ int Chunk::addConstant(Value value)
 	return constants.size() - 1;			// return the index where the element was added
 }
 
+uint8_t Chunk::getConstAdd(Value value)
+{
+	for (int i = 0; i < constants.size(); i++)
+	{
+		if (value.isEqual(constants[i]))
+		{
+			return i;
+		}
+	}
+
+	return -1;
+}
+
 Value Chunk::getConst(int i)
 {
 	return constants[i];

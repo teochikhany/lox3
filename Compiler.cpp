@@ -41,7 +41,14 @@ void Compiler::enterPrimary(loxParser::PrimaryContext* ctx)
         case 38:                                                // identifier aka variable name
         {
             std::string* text = new std::string(ctx->getText());
-            uint8_t constant = chunk->addConstant(Value(text));
+            uint8_t constant = chunk->getConstAdd(Value(text));
+
+            if (constant == 255)
+            {
+                printf("Compilation Error at line %d: No variable with name \"%s\" is defined\n", startLine, text->c_str());
+                exit(1);
+            }
+
             chunk->WriteChunk(OP_GET_GLOBAL, startLine);
             chunk->WriteChunk(constant, startLine);
         }
@@ -251,7 +258,14 @@ void Compiler::exitAssignment(loxParser::AssignmentContext* ctx)
     if (ctx->children.size() > 2)
     {
         std::string* text = new std::string(ctx->children[0]->getText());
-        uint8_t constant = chunk->addConstant(Value(text));
+        uint8_t constant = chunk->getConstAdd(Value(text));
+
+        if (constant == 255)
+        {
+            printf("Compilation Error at line %d: No variable with name \"%s\" is defined\n", line, text->c_str());
+            exit(1);
+        }
+
         chunk->WriteChunk(OP_SET_GLOBAL, line);
         chunk->WriteChunk(constant, line);
     }
