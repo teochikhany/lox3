@@ -192,6 +192,20 @@ InterpretResult VM::run() {
             break;
         }
 
+        case OP_GET_LOCAL:
+        {
+            uint8_t offset = chunk->getCode((ip - chunk->getAddCode(0)));
+            push(stack.at(offset));
+            break;
+        }
+
+        case OP_SET_LOCAL:
+        {
+            uint8_t offset = chunk->getCode((ip - chunk->getAddCode(0)));
+            stack.at(offset) = Value(stack.back());
+            break;
+        }
+
         case OP_RETURN:
             //std::cout << " \t\t " << pop().Print() << std::endl;
             return InterpretResult::INTERPRET_OK;

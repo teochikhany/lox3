@@ -74,6 +74,10 @@ int Debug::disassembleInstruction(Chunk* chunk, int offset) {
 		return ConstantInstruction("OP_GET_GLOBAL", chunk, offset);
 	case OP_SET_GLOBAL:
 		return ConstantInstruction("OP_SET_GLOBAL", chunk, offset);
+	case OP_GET_LOCAL:
+		return ConstantInstruction("OP_GET_LOCAL", chunk, offset);
+	case OP_SET_LOCAL:
+		return ConstantInstruction("OP_SET_LOCAL", chunk, offset);
 	default:
 		printf("Unknown opcode %d\n", instruction);
 		return offset + 1;
