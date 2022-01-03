@@ -4,6 +4,7 @@
 #include "Value.h"
 
 enum OpCode : uint8_t {
+	OP_POP,
 	OP_CONSTANT,
 	OP_NIL,
 	OP_TRUE,

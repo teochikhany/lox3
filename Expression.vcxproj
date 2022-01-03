@@ -24,6 +24,7 @@
     <ClCompile Include="Chunk.cpp" />
     <ClCompile Include="Compiler.cpp" />
     <ClCompile Include="Debug.cpp" />
+    <ClCompile Include="Local.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Obj.cpp" />
     <ClCompile Include="Value.cpp" />
@@ -33,6 +34,7 @@
     <ClInclude Include="Chunk.h" />
     <ClInclude Include="Compiler.h" />
     <ClInclude Include="Debug.h" />
+    <ClInclude Include="Local.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="Obj.h" />
     <ClInclude Include="Value.h" />

@@ -244,9 +244,30 @@ void Compiler::exitVarDecl(loxParser::VarDeclContext* ctx)
         }
 
         std::string* text = new std::string(ctx->children[1]->getText());
-        uint8_t constant = chunk->addConstant(Value(text));
-        chunk->WriteChunk(OP_DEFINE_GLOBAL, line);
-        chunk->WriteChunk(constant, line);
+
+        // added code for local var
+        if (scopeDepth > 0)
+        {
+            for (int i = locals.size() - 1; i >= 0; i--)
+            {
+                Local local = locals[i];
+                if (local.getDepth() < scopeDepth) { break; }
+
+                if (local.getName() == *text)
+                {
+                    printf("Compilation Error at line %d: Multiple variables with same name \"%s\" is defined\n", line, text->c_str());
+                    exit(1);
+                }
+            }
+
+            locals.push_back(Local(*text, scopeDepth));
+        }
+        else
+        {
+            uint8_t constant = chunk->addConstant(Value(text));
+            chunk->WriteChunk(OP_DEFINE_GLOBAL, line);
+            chunk->WriteChunk(constant, line);
+        }
     }
 }
 
@@ -268,6 +289,23 @@ void Compiler::exitAssignment(loxParser::AssignmentContext* ctx)
 
         chunk->WriteChunk(OP_SET_GLOBAL, line);
         chunk->WriteChunk(constant, line);
+    }
+}
+
+
+void Compiler::enterBlock(loxParser::BlockContext* ctx)
+{
+    scopeDepth++;
+}
+
+void Compiler::exitBlock(loxParser::BlockContext* ctx)
+{
+    scopeDepth--;
+
+    while (!locals.empty() && locals.at(locals.size() - 1).getDepth() > scopeDepth )
+    {
+        locals.pop_back();
+        chunk->WriteChunk(OP_POP, ctx->getStop()->getLine());
     }
 }
 
