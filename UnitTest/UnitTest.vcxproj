@@ -49,7 +49,7 @@
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="types.cpp" />
-    <ClCompile Include="variables.cpp" />
+    <ClCompile Include="global_variables.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

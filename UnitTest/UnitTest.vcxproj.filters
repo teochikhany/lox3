@@ -23,7 +23,7 @@
     <ClCompile Include="control_flow.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
-    <ClCompile Include="variables.cpp">
+    <ClCompile Include="global_variables.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
     <ClCompile Include="types.cpp">
