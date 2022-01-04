@@ -204,7 +204,10 @@ InterpretResult VM::run() {
         case OP_SET_LOCAL:
         {
             uint8_t offset = chunk->getCode((ip - chunk->getAddCode(0)));
-            stack.at(offset) = Value(stack.back());
+            stack.at(offset) = Value(stack.back());     // I can just stack.pop() here instead of stack.back()
+            pop();      // not sure if I should do this, the book says to keep the value on the stack (chap 22.4.1), but I want to clean the stack (??);
+                        // if i dont't pop, this will be equivalant to "assignment expressions" ":=" of python 3.8
+                        // I dont' want that, so I will pop.
             ip++;
             break;
         }

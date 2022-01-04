@@ -141,8 +141,10 @@ void Debug::PrintLocals(std::vector<Local> locals)
 {
 	for (auto x : locals)
 	{
-		std::cout << "[" << x.print() << "]" << std::endl;
+		std::cout << "[" << x.print() << "], ";
 	}
+
+	std::cout << std::endl;
 }
 
 #endif // 
