@@ -10,7 +10,7 @@ The code generation and VM are custom made.
 - [x] Dynamique Values
 - [x] Double - Bool - String values
 - [x] Global Variables
-- [ ] Local Variables
+- [x] Local Variables
 - [x] Print Statement
 - [x] If-else Statement
 - [x] While Statement
