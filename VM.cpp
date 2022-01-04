@@ -251,6 +251,7 @@ Value VM::peek(int distance)
     return stack[stack.size() - 1 - distance];
 }
 
+#ifdef _DEBUG
 
 std::map<std::string, Value> VM::getGlobal()
 {
@@ -266,3 +267,5 @@ std::vector<Value> VM::getChunkValues()
 {
     return chunk->getConstants();
 }
+
+#endif // 

@@ -64,8 +64,11 @@ int Chunk::getLine(int i)
 	return lines[i];
 }
 
+#ifdef _DEBUG
 
 std::vector<Value> Chunk::getConstants()
 {
 	return constants;
 }
+
+#endif // 

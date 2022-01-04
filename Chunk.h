@@ -53,6 +53,8 @@ public:
 	int getLine(int offset);	// bug lama ma ektob return, beta3mol runtime error, vector out of bound
 								//// ymkn bas lama yi koun fi 1 line bel chunk
 
+#ifdef _DEBUG
 	std::vector<Value> getConstants();
+#endif // 
 };
 

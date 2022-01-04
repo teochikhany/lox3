@@ -32,8 +32,10 @@ public:
 	InterpretResult interpret(Chunk* chunk);
 
 	// can probably remove these with #ifdef _DEBUG, but UnitTest won't work on release mode anymore
+#ifdef _DEBUG
 	std::map<std::string, Value> getGlobal();
 	std::vector<Value> getStack();
 	std::vector<Value> getChunkValues();
+#endif // 
 };
 
