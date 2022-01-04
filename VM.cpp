@@ -77,6 +77,12 @@ InterpretResult VM::run() {
             break;
         }
 
+        case OP_POP:
+        {
+            pop();
+            break;
+        }
+
         case OP_PRINT:
         {
             std::cout << pop().Print() << std::endl;
@@ -187,6 +193,25 @@ InterpretResult VM::run() {
             break;
         }
 
+        case OP_GET_LOCAL:
+        {
+            uint8_t offset = chunk->getCode((ip - chunk->getAddCode(0)));
+            push(stack.at(offset));
+            ip++;
+            break;
+        }
+
+        case OP_SET_LOCAL:
+        {
+            uint8_t offset = chunk->getCode((ip - chunk->getAddCode(0)));
+            stack.at(offset) = Value(stack.back());     // I can just stack.pop() here instead of stack.back()
+            pop();      // not sure if I should do this, the book says to keep the value on the stack (chap 22.4.1), but I want to clean the stack (??);
+                        // if i dont't pop, this will be equivalant to "assignment expressions" ":=" of python 3.8
+                        // I dont' want that, so I will pop.
+            ip++;
+            break;
+        }
+
         case OP_RETURN:
             //std::cout << " \t\t " << pop().Print() << std::endl;
             return InterpretResult::INTERPRET_OK;
@@ -207,9 +232,13 @@ void VM::push(Value value)
 
 Value VM::pop()
 {
-    Value d = stack.back();
-    stack.pop_back();
-    return d;
+    if (!stack.empty())
+    {
+        Value d = stack.back();
+        stack.pop_back();
+        return d;
+    }
+    return Value();
 }
 
 void VM::resetStack()
@@ -222,6 +251,7 @@ Value VM::peek(int distance)
     return stack[stack.size() - 1 - distance];
 }
 
+#ifdef _DEBUG
 
 std::map<std::string, Value> VM::getGlobal()
 {
@@ -237,3 +267,5 @@ std::vector<Value> VM::getChunkValues()
 {
     return chunk->getConstants();
 }
+
+#endif // 

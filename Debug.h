@@ -5,6 +5,7 @@
 #include "chunk.h"
 #include "VM.h"
 #include <map>
+#include "Local.h"
 
 class Debug
 {
@@ -18,6 +19,7 @@ public:
 	static void PrintValues(std::vector<Value> v, std::string name = "\tStack: ");
 	static int disassembleInstruction(Chunk* chunk, int offset);
 	static void PrintGlobalTable(std::map<std::string, Value> GlobalTable);
+	static void PrintLocals(std::vector<Local> locals);
 };
 
 #endif // 

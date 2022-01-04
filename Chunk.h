@@ -4,6 +4,7 @@
 #include "Value.h"
 
 enum OpCode : uint8_t {
+	OP_POP,
 	OP_CONSTANT,
 	OP_NIL,
 	OP_TRUE,
@@ -24,6 +25,8 @@ enum OpCode : uint8_t {
 	OP_DEFINE_GLOBAL,
 	OP_GET_GLOBAL,
 	OP_SET_GLOBAL,
+	OP_GET_LOCAL,
+	OP_SET_LOCAL,
 	OP_RETURN
 };
 
@@ -50,6 +53,8 @@ public:
 	int getLine(int offset);	// bug lama ma ektob return, beta3mol runtime error, vector out of bound
 								//// ymkn bas lama yi koun fi 1 line bel chunk
 
+#ifdef _DEBUG
 	std::vector<Value> getConstants();
+#endif // 
 };
 

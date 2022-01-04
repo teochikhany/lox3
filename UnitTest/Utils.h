@@ -12,6 +12,7 @@
 #include "VM.h"
 #include "Compiler.h"
 #include "Value.h"
+#include "Local.h"
 
 Value custom_main_top_stack(std::string string_input);
 Value custom_main_first_global(std::string string_input, std::string var_name);

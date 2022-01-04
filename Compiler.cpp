@@ -40,17 +40,28 @@ void Compiler::enterPrimary(loxParser::PrimaryContext* ctx)
 
         case 38:                                                // identifier aka variable name
         {
-            std::string* text = new std::string(ctx->getText());
-            uint8_t constant = chunk->getConstAdd(Value(text));
+            std::string* var_name = new std::string(ctx->getText());
 
-            if (constant == 255)
+            uint8_t local_index = localOffset(*var_name);
+
+            if (local_index == 255)     // global variable
             {
-                printf("Compilation Error at line %d: No variable with name \"%s\" is defined\n", startLine, text->c_str());
-                exit(1);
-            }
+                uint8_t constant = chunk->getConstAdd(Value(var_name));
 
-            chunk->WriteChunk(OP_GET_GLOBAL, startLine);
-            chunk->WriteChunk(constant, startLine);
+                if (constant == 255)
+                {
+                    printf("Compilation Error at line %d: No variable with name \"%s\" is defined\n", startLine, var_name->c_str());
+                    exit(1);
+                }
+
+                chunk->WriteChunk(OP_GET_GLOBAL, startLine);
+                chunk->WriteChunk(constant, startLine);
+            }
+            else    // local variable
+            {
+                chunk->WriteChunk(OP_GET_LOCAL, startLine);
+                chunk->WriteChunk(local_index, startLine);
+            }
         }
 
         default:
@@ -244,9 +255,35 @@ void Compiler::exitVarDecl(loxParser::VarDeclContext* ctx)
         }
 
         std::string* text = new std::string(ctx->children[1]->getText());
-        uint8_t constant = chunk->addConstant(Value(text));
-        chunk->WriteChunk(OP_DEFINE_GLOBAL, line);
-        chunk->WriteChunk(constant, line);
+
+        // added code for local var
+        if (scopeDepth > 0)
+        {
+            for (int i = locals.size() - 1; i >= 0; i--)
+            {
+                Local local = locals[i];
+                if (local.getDepth() < scopeDepth) { break; }
+
+                if (local.getName() == *text)
+                {
+                    printf("Compilation Error at line %d: Multiple variables with same name \"%s\" is defined\n", line, text->c_str());
+                    exit(1);
+                }
+            }
+
+            locals.push_back(Local(*text, scopeDepth));
+
+#ifdef _DEBUG
+            printf("Locals at scopeDepth of %d: ", scopeDepth);
+            Debug::PrintLocals(locals);
+#endif // 
+        }
+        else
+        {
+            uint8_t constant = chunk->addConstant(Value(text));
+            chunk->WriteChunk(OP_DEFINE_GLOBAL, line);
+            chunk->WriteChunk(constant, line);
+        }
     }
 }
 
@@ -257,17 +294,51 @@ void Compiler::exitAssignment(loxParser::AssignmentContext* ctx)
 
     if (ctx->children.size() > 2)
     {
-        std::string* text = new std::string(ctx->children[0]->getText());
-        uint8_t constant = chunk->getConstAdd(Value(text));
+        std::string* var_name = new std::string(ctx->children[0]->getText());
 
-        if (constant == 255)
+        uint8_t local_index = localOffset(*var_name);
+
+        if (local_index == 255)
         {
-            printf("Compilation Error at line %d: No variable with name \"%s\" is defined\n", line, text->c_str());
-            exit(1);
+            uint8_t constant = chunk->getConstAdd(Value(var_name));
+
+            if (constant == 255)
+            {
+                printf("Compilation Error at line %d: No variable with name \"%s\" is defined\n", line, var_name->c_str());
+                exit(1);
+            }
+
+            chunk->WriteChunk(OP_SET_GLOBAL, line);
+            chunk->WriteChunk(constant, line);
+        }
+        else
+        {
+            chunk->WriteChunk(OP_SET_LOCAL, line);
+            chunk->WriteChunk(local_index, line);
         }
 
-        chunk->WriteChunk(OP_SET_GLOBAL, line);
-        chunk->WriteChunk(constant, line);
+    }
+}
+
+
+void Compiler::enterBlock(loxParser::BlockContext* ctx)
+{
+    scopeDepth++;
+}
+
+void Compiler::exitBlock(loxParser::BlockContext* ctx)
+{
+    scopeDepth--;
+
+    while (!locals.empty() && locals.at(locals.size() - 1).getDepth() > scopeDepth )
+    {
+        locals.pop_back();
+        chunk->WriteChunk(OP_POP, ctx->getStop()->getLine());
+
+#ifdef _DEBUG
+        printf("Locals at scopeDepth of %d: ", scopeDepth);
+        Debug::PrintLocals(locals);
+#endif // 
     }
 }
 
@@ -283,6 +354,22 @@ void Compiler::enterExpression(loxParser::ExpressionContext* ctx)
 
 }
 
+// fix this to return int and cast result to uint8_t in the calling function
+uint8_t Compiler::localOffset(std::string name)
+{
+    for (int i = locals.size() - 1; i >= 0; i--)
+    {
+        Local local = locals[i];
+        
+        if (local.getName() == name)
+        {
+            return i;
+        }
+    }
+
+    return 255;
+}
+
 
 void Compiler::exitReturnStmt(loxParser::ReturnStmtContext* ctx)
 {
@@ -292,10 +379,15 @@ void Compiler::exitReturnStmt(loxParser::ReturnStmtContext* ctx)
 void Compiler::exitProgram(loxParser::ProgramContext* ctx)
 {
     VM* vm = new VM();
-    vm->interpret(chunk);
-    printf("\n\n");
 
 #ifdef _DEBUG
+    printf("\n\n\nVM running output:");
+#endif // 
+
+    vm->interpret(chunk);
+
+#ifdef _DEBUG
+    printf("\n\n");
     Debug::disassembleChunk(chunk, "test chunk");
     Debug::PrintGlobalTable(vm->getGlobal());
     Debug::PrintValues(vm->getChunkValues(), "\nChunk Values: ");
