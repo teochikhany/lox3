@@ -1,0 +1,14 @@
+time python .\while_100000000.py
+
+time ..\x64\Release\Expression.exe .\while_100000000.lox
+
+------------------------------------------------------------
+
+With time being a powershell function:
+
+function time
+{ 
+	Param($exe, $arg)
+	
+	Measure-Command { start-process $exe -ArgumentList $arg -wait | Out-Host } 
+}

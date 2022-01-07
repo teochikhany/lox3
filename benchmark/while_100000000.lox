@@ -1,0 +1,9 @@
+var x = 0.0;
+
+while (x < 100000000)
+{
+    x = x + 1;
+}
+
+print x;
+return;
