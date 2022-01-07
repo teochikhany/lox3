@@ -52,7 +52,9 @@ InterpretResult VM::run() {
           push( Value(a op b) ); \
         } while (false)
 
+#ifdef _DEBUG
     std::cout << std::endl << std::endl;
+#endif // 
 
     for (;;) {
 
