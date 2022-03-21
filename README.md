@@ -11,6 +11,7 @@ The code generation and VM are custom made.
 - [x] Double - Bool - String values
 - [x] Global Variables
 - [x] Local Variables
+- [x] Scopes 
 - [x] Print Statement
 - [x] If-else Statement
 - [x] While Statement
